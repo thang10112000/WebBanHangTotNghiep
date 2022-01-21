@@ -1,0 +1,9 @@
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\obj\Debug\Model.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\bin\Debug\Model.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\bin\Debug\Model.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\bin\Debug\Common.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\bin\Debug\Common.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\obj\Debug\Model.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Model\obj\Debug\Model.pdb
