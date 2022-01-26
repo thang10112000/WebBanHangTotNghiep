@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebAffiliateMarketing.Common
+namespace ShopThoiTrang.Common
 {
     public static class CommonConstants // dùng để lưu tham số
     {

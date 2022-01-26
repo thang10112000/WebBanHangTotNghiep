@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebAffiliateMarketing
+namespace ShopThoiTrang
 {
     [Serializable] //chuyển đổi về dạng trung gian để lưu trữ , truyền thông
     public class UserLogin

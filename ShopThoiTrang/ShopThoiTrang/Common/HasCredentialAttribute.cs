@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebAffiliateMarketing
+namespace ShopThoiTrang
 {
     public class HasCredentialAttribute : AuthorizeAttribute
     {

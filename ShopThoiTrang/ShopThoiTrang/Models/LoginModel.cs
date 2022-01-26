@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WebAffiliateMarketing.Models
+namespace ShopThoiTrang.Models
 {
     public class LoginModel
     {
