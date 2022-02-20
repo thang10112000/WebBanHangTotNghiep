@@ -1,5 +1,0 @@
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Common\bin\Debug\Common.dll
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Common\bin\Debug\Common.pdb
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Common\obj\Debug\Common.dll
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\ShopThoiTrang\Common\obj\Debug\Common.pdb
