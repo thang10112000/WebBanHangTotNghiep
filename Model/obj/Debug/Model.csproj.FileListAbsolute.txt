@@ -13,6 +13,5 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\bin\Debug\PagedList.
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\bin\Debug\PagedList.Mvc.xml
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.csproj.AssemblyReference.cache
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.csproj.CopyComplete
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.pdb
