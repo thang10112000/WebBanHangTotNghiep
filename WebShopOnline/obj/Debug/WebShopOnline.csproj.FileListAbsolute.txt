@@ -66,4 +66,3 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\We
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.pdb
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.csproj.CopyComplete

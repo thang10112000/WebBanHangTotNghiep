@@ -65,14 +65,16 @@
                                 <td>@item.Address</td>
                                 <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
                                 <td>
-                                    <a href="/Admin/User/Edit/@item.ID">Sửa</a>
+                                    <a class="btn btn-info btn-icon-split" href="/Admin/User/Edit/@item.ID">Sửa</a>
                                     |
-                                    @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
-                               {
-                                   Confirm = "Bạn có muốn xoá bản ghi này?",
-                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                   HttpMethod = "Delete"
-                               })
+
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions 
+                                   {
+                                            Confirm = "Bạn có muốn xoá bản ghi này?",
+                                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   },new { @class = "btn btn-danger btn-icon-split" })
+                                  
                                 </td>
 
                             </tr>
@@ -85,7 +87,7 @@
                     </div>
                 </div>
 
-                </div>
+            </div>
         </div>
 
     </div>

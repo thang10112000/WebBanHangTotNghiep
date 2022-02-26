@@ -87,12 +87,10 @@ namespace WebShopOnline.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        [HttpDelete]
         [HasCredential(RoleID = "DELETE_USER")]
         public ActionResult Delete(int id)
         {
             new UserDao().Delete(id);
-
             return RedirectToAction("Index");
         }
 
