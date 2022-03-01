@@ -66,3 +66,11 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\We
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_ImageResize.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_ImageResize.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_FileEditor.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_Watermark.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_FileEditor.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_Watermark.pdb

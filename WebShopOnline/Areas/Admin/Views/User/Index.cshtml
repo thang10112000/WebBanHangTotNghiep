@@ -18,77 +18,80 @@
             <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng</h6>
         </div>
         <div class="card-body">
-            <div class="row form-group">
+            @using (Html.BeginForm("Index", "User", FormMethod.Get))
+            {
+                <div class="row form-group">
 
-                <div class="col-md-4">
-                    <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" placeholder="Tìm kiếm thông tin trong bảng..." />
+                    <div class="col-md-4">
+                        <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" placeholder="Nhập thông tin bạn muốn kiếm..." />
 
-                </div>
-                <div class="col-md-5">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
                     </div>
+                    <div class="col-md-5">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="offset-md-1">
+
+                        <a class="btn btn-primary" href="/Admin/User/Create">Thêm mới</a>
+                    </div>
+
+
                 </div>
-                <div class="offset-md-1">
+            }
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tài khoản</th>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Trạng thái</th>
+                                <th>#</th>
 
-                    <a class="btn btn-primary" href="/Admin/User/Create">Thêm mới</a>
-                </div>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID">
 
-            </div>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Tài khoản</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
-                            <th>Trạng thái</th>
-                            <th>#</th>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                                    <td>
+                                        <a class="btn btn-info btn-icon-split" href="/Admin/User/Edit/@item.ID">Sửa</a>
+                                        |
 
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr id="row_@item.ID">
-
-                                <td>@item.UserName</td>
-                                <td>@item.Name</td>
-                                <td>@item.Email</td>
-                                <td>@item.Phone</td>
-                                <td>@item.Address</td>
-                                <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
-                                <td>
-                                    <a class="btn btn-info btn-icon-split" href="/Admin/User/Edit/@item.ID">Sửa</a>
-                                    |
-
-                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions 
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
                                    {
                                             Confirm = "Bạn có muốn xoá bản ghi này?",
                                        OnComplete = "$('#row_" + @item.ID + "').remove()",
                                        HttpMethod = "Delete"
-                                   },new { @class = "btn btn-danger btn-icon-split" })
-                                  
-                                </td>
+                                   }, new { @class = "btn btn-danger btn-icon-split" })
 
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <div class="container">
-                    <div class="pagination" style="margin-left: 400px">
-                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="container">
+                        <div class="pagination" style="margin-left: 400px">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
 
     </div>
 </div>

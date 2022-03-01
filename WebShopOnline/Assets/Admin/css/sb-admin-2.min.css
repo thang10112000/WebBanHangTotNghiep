@@ -11548,3 +11548,9 @@ ul.pagination li {
         ul.pagination li a:hover:not(.active) {
             background-color: #4e73df;
         }
+
+.responsive {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
