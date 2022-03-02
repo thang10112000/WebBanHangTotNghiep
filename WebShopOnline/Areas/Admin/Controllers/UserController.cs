@@ -91,6 +91,7 @@ namespace WebShopOnline.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             new UserDao().Delete(id);
+           
             return RedirectToAction("Index");
         }
 

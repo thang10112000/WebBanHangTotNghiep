@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.CategoryID, new { @class = "form-control ", @placeholder = "categoryID..." })
+                                @Html.DropDownListFor(model => model.CategoryID,null, new { @class = "btn btn-primary dropdown-toggle ", @placeholder = "categoryID..." })
                             </div>
                         </div>
                         <div class="form-group">
