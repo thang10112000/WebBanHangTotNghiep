@@ -5,6 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
+@section jsFooter{
+    <script src="/Assets/Admin/js/controller/categoryController.js"></script>
+    }
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -63,7 +66,7 @@
                                 <td>@item.Name</td>
                                 <td>@item.ParentID</td>
                                 <td>@item.SeoTitle</td>
-                                <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+                                <td><a href="#" class="btn-active btn btn-success" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
                                 <td>
                                     <a class="btn btn-info btn-icon-split" href="/Admin/Category/Edit/@item.ID">Sửa</a>
                                     |

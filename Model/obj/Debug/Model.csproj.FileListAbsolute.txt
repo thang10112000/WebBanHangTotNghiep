@@ -15,4 +15,3 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.cspr
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.pdb
-C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Model\obj\Debug\Model.csproj.CopyComplete
