@@ -9,7 +9,7 @@ namespace Model.EF
     [Table("About")]
     public partial class About
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+       
         public long ID { get; set; }
 
         [StringLength(250)]
@@ -43,6 +43,6 @@ namespace Model.EF
         [StringLength(250)]
         public string MetaDescriptions { get; set; }
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }
