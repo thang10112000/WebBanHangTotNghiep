@@ -27,6 +27,9 @@ namespace Model.EF
         [StringLength(50)]
         public string ShipEmail { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string Content { get; set; }
+
         public int? Status { get; set; }
     }
 }

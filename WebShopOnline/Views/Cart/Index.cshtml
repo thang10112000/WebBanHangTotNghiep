@@ -1,0 +1,77 @@
+﻿@model List<WebShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+@section jsFooter{
+
+    <script src="/Assets/Client/js/controller/cartController.js"></script>
+}
+<div class="ps-content pt-80 pb-80">
+    <div class="ps-container">
+
+        <div class="ps-cart-listing">
+            @if (Model.Count > 0)
+            {
+                <table class="table ps-cart__table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="ps-product__preview" href="product-detail.html">
+                                        <img class="mr-15" src="@item.Product.Image" alt="@item.Product.Name">@item.Product.Name
+                                    </a>
+                                </td>
+                                <td>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</td>
+                                <td>
+                                    <div class="form-group--number">
+                                        <button class="minus"><span>-</span></button>
+                                        <input class="form-control txtQuantity" type="text" data-id="@item.Product.ID" value="@item.Quantity">
+                                        <button class="plus"><span>+</span></button>
+                                    </div>
+                                </td>
+                                <td>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</td>
+                                <td>
+                                    <div class="ps-remove" data-id="@item.Product.ID"></div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+            }
+            <div class="ps-cart__actions">
+                <div class="ps-cart__promotion">
+                    <div class="form-group">
+                        <div class="ps-form--icon">
+                            <i class="fa fa-angle-right"></i>
+                            <input class="form-control" type="text" placeholder="Promo Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnContinue" class="ps-btn ps-btn--gray">Tiếp tục mua sắm</button>
+                    </div>
+                </div>
+
+                <div class="ps-cart__total">
+                    <button id="btnUpdate" class="ps-btn ps-btn--gray">Cập nhập giỏ hàng</button>
+
+                    <h3>Total Price: <span> 2599.00 $</span></h3><a class="ps-btn" id="btnPayment">Thanh toán<i class="ps-icon-next"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

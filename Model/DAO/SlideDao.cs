@@ -10,16 +10,18 @@ namespace Model.DAO
 {
     public class SlideDao
     {
+        private ShopBanHangDbContext db = null;
 
-        ShopOnline db = null;
         public SlideDao()
         {
-            db = new ShopOnline();
+            db = new ShopBanHangDbContext();
         }
+
         public List<Slide> ListAll()
         {
             return db.Slides.Where(x => x.Status == true).OrderBy(y => y.DisplayOrder).ToList();
         }
+
         public long Insert(Slide entity)
         {
             db.Slides.Add(entity);
@@ -27,6 +29,7 @@ namespace Model.DAO
             db.SaveChanges();
             return entity.ID;
         }
+
         public bool Update(Slide entity)
         {
             try
@@ -48,12 +51,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public Slide ViewDetail(int id)
         {
             return db.Slides.Find(id);
         }
+
         public IEnumerable<Slide> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Slide> model = db.Slides;
@@ -63,6 +67,7 @@ namespace Model.DAO
             }
             return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pageSize);
         }
+
         public bool Delete(int id)
         {
             try
@@ -76,8 +81,8 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public bool ChangeStatus(long id)
         {
             var slide = db.Slides.Find(id);

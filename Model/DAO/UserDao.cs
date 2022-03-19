@@ -11,10 +11,11 @@ namespace Model.DAO
 {
     public class UserDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public UserDao()
         {
-            db = new ShopOnline();
+            db = new ShopBanHangDbContext();
         }
 
         public long Insert(User entity)
@@ -23,6 +24,7 @@ namespace Model.DAO
             db.SaveChanges();
             return entity.ID;
         }
+
         public long InsertForFacebook(User entity)
         {
             var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
@@ -36,8 +38,8 @@ namespace Model.DAO
             {
                 return user.ID;
             }
-
         }
+
         public bool Update(User entity)
         {
             try
@@ -56,12 +58,11 @@ namespace Model.DAO
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 //logging
                 return false;
             }
-
         }
 
         public IEnumerable<User> ListAllPaging(string searchString, int page, int pageSize)
@@ -79,10 +80,12 @@ namespace Model.DAO
         {
             return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
+
         public User ViewDetail(int id)
         {
             return db.Users.Find(id);
         }
+
         public List<string> GetListCredential(string userName)
         {
             var user = db.Users.Single(x => x.UserName == userName);
@@ -100,8 +103,8 @@ namespace Model.DAO
                             UserGroupID = x.UserGroupID
                         });
             return data.Select(x => x.RoleID).ToList();
-
         }
+
         public int Login(string userName, string passWord, bool isLoginAdmin = false)
         {
             var result = db.Users.SingleOrDefault(x => x.UserName == userName);
@@ -156,6 +159,7 @@ namespace Model.DAO
             db.SaveChanges();
             return user.Status;
         }
+
         public bool Delete(int id)
         {
             try
@@ -169,13 +173,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
 
         public bool CheckUserName(string userName)
         {
             return db.Users.Count(x => x.UserName == userName) > 0;
         }
+
         public bool CheckEmail(string email)
         {
             return db.Users.Count(x => x.Email == email) > 0;

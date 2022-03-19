@@ -64,6 +64,8 @@
     <Compile Include="DAO\ContentDao.cs" />
     <Compile Include="DAO\FeedbackDao.cs" />
     <Compile Include="DAO\MenuDao.cs" />
+    <Compile Include="DAO\OrderDao.cs" />
+    <Compile Include="DAO\OrderDetailDao.cs" />
     <Compile Include="DAO\ProductCategoryDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
     <Compile Include="DAO\SlideDao.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="EF\Product.cs" />
     <Compile Include="EF\ProductCategory.cs" />
     <Compile Include="EF\Role.cs" />
-    <Compile Include="EF\ShopOnline.cs" />
+    <Compile Include="EF\ShopBanHangDbContext.cs" />
     <Compile Include="EF\Slide.cs" />
     <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\SystemConfig.cs" />

@@ -11542,11 +11542,12 @@ ul.pagination li {
 
         ul.pagination li a.active {
             background-color: #4CAF50;
-            color: white;
+            color: black;
         }
 
         ul.pagination li a:hover:not(.active) {
             background-color: #4e73df;
+            
         }
 
 .responsive {

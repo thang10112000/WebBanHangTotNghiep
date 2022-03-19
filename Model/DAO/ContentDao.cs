@@ -11,26 +11,27 @@ namespace Model.DAO
 {
     public class ContentDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
         public static string USER_SESSION = "USER_SESSION";
+
         public ContentDao()
         {
-            db = new ShopOnline();
-
+            db = new ShopBanHangDbContext();
         }
 
         public List<Content> ListAll()
         {
             return db.Contents.Where(x => x.Status == true).ToList();
         }
+
         public Content GetByID(long id)
         {
             var model = db.Contents.Find(id);
             model.ViewCount++;
             db.SaveChanges();
             return model;
-
         }
+
         public bool ChangeStatus(long id)
         {
             var content = db.Contents.Find(id);
@@ -38,10 +39,12 @@ namespace Model.DAO
             db.SaveChanges();
             return content.Status;
         }
+
         public bool CheckTag(string id)
         {
             return db.Tags.Count(x => x.ID == id) > 0;
         }
+
         public void InsertContentTag(long contentId, string tagId)
         {
             var contentTag = new ContentTag();
@@ -51,6 +54,7 @@ namespace Model.DAO
             db.ContentTags.Add(contentTag);
             db.SaveChanges();
         }
+
         public void InsertTag(string id, string name)
         {
             var tag = new Tag();
@@ -59,6 +63,7 @@ namespace Model.DAO
             db.Tags.Add(tag);
             db.SaveChanges();
         }
+
         public IEnumerable<Content> ListAllByTag(string tag, int page, int pageSize)
         {
             var model = (from a in db.Contents
@@ -74,7 +79,6 @@ namespace Model.DAO
                              CreatedDate = a.CreatedDate,
                              CreatedBy = a.CreatedBy,
                              ID = a.ID
-
                          }).AsEnumerable().Select(x => new Content()
                          {
                              Name = x.Name,
@@ -87,10 +91,12 @@ namespace Model.DAO
                          });
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+
         public Tag GetTag(string id)
         {
             return db.Tags.Find(id);
         }
+
         public bool Delete(int id)
         {
             try
@@ -104,18 +110,18 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
-        public IEnumerable<Content> ListAllPaging(string searchString, int page, int pageSize) // phương thức lấy ra các bảng ghi 
+
+        public IEnumerable<Content> ListAllPaging(string searchString, int page, int pageSize) // phương thức lấy ra các bảng ghi
         {
             IQueryable<Content> model = db.Contents;
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.Name.Contains(searchString));
-
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+
         /// <summary>
         /// List all content for client
         /// </summary>
@@ -157,12 +163,12 @@ namespace Model.DAO
 
                     //insert to content tag
                     this.InsertContentTag(content.ID, tagId);
-
                 }
             }
 
             return content.ID;
         }
+
         public bool Update(Content entity)
         {
             try
@@ -198,7 +204,6 @@ namespace Model.DAO
 
                         //insert to content tag
                         this.InsertContentTag(content.ID, tagId);
-
                     }
                 }
                 db.SaveChanges();
@@ -208,8 +213,8 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public long Edit(Content content)
         {
             //Xử lý alias
@@ -238,17 +243,18 @@ namespace Model.DAO
 
                     //insert to content tag
                     this.InsertContentTag(content.ID, tagId);
-
                 }
             }
 
             return content.ID;
         }
+
         public void RemoveAllContentTag(long contentId)
         {
             db.ContentTags.RemoveRange(db.ContentTags.Where(x => x.ContentID == contentId));
             db.SaveChanges();
         }
+
         public List<Tag> ListTag(long contentId)
         {
             var model = (from a in db.Tags
@@ -266,11 +272,10 @@ namespace Model.DAO
                          });
             return model.ToList();
         }
+
         public List<Content> ListNewContent(int top)
         {
             return db.Contents.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
-
     }
 }
-

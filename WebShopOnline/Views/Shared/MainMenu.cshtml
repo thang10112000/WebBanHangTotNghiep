@@ -1,0 +1,37 @@
+﻿@model List<Model.EF.Menu>
+
+<ul class="main-menu menu">
+
+    @foreach (var item in Model.Where(x => x.ParentID == null))
+    {
+        var child = Model.Where(x => x.ParentID == item.ID);
+        var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
+        <li class="menu-item menu-item-has-children has-mega-menu">
+            <a href="@item.Link" @parentClass target="@item.Target">@item.Text</a>
+            @if (child.Count() > 0)
+            {
+                <div class="mega-menu">
+
+                    <div class="mega-wrap">
+
+                        <div class="mega-column">
+                            <h4 class="mega-heading">Shoes</h4>
+                            <ul class="mega-item">
+                                @foreach (var childItem in child)
+                                {
+                                    <li><a href="/san-pham/@childItem.Link-@childItem.ID">@childItem.Text</a></li>
+
+                                }
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            }
+        </li>
+    }
+
+</ul>
+

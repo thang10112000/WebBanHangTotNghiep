@@ -10,16 +10,18 @@ namespace Model.DAO
 {
     public class UserGroupDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public UserGroupDao()
         {
-            db = new ShopOnline();
-
+            db = new ShopBanHangDbContext();
         }
+
         public List<UserGroup> ListAll()
         {
             return db.UserGroups.ToList();
         }
+
         public string Insert(UserGroup entity)
         {
             db.UserGroups.Add(entity);
@@ -27,6 +29,7 @@ namespace Model.DAO
 
             return entity.ID;
         }
+
         public bool Update(UserGroup entity)
         {
             try
@@ -42,12 +45,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public UserGroup ViewDetail(string id)
         {
             return db.UserGroups.Find(id);
         }
+
         public IEnumerable<UserGroup> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<UserGroup> model = db.UserGroups;
@@ -57,7 +61,7 @@ namespace Model.DAO
             }
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
-      
+
         public bool Delete(string id)
         {
             try
@@ -71,7 +75,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
     }
 }

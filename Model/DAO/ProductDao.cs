@@ -11,19 +11,23 @@ namespace Model.DAO
 {
     public class ProductDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public ProductDao()
         {
-            db = new ShopOnline();
+            db = new ShopBanHangDbContext();
         }
+
         public List<Product> ListNewProduct(int top)
         {
             return db.Products.OrderByDescending(x => x.CreateDate).Take(top).ToList();
         }
+
         public List<string> ListName(string keyword)
         {
             return db.Products.Where(x => x.Name.Contains(keyword)).Select(x => x.Name).ToList();
         }
+
         public bool ChangeStatus(long id)
         {
             var product = db.Products.Find(id);
@@ -32,16 +36,16 @@ namespace Model.DAO
             return product.Status;
         }
 
-        public IEnumerable<Product> ListAllPaging(string searchString, int page, int pageSize) // phương thức lấy ra các bảng ghi 
+        public IEnumerable<Product> ListAllPaging(string searchString, int page, int pageSize) // phương thức lấy ra các bảng ghi
         {
             IQueryable<Product> model = db.Products;
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.Name.Contains(searchString));
-
             }
             return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pageSize);
         }
+
         /// <summary>
         /// Get list product by category
         /// </summary>
@@ -53,6 +57,7 @@ namespace Model.DAO
             var model = db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreateDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return model;
         }
+
         public List<ProductViewModel> Search(string keyword, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             totalRecord = db.Products.Where(x => x.Name == keyword).Count();
@@ -96,21 +101,29 @@ namespace Model.DAO
             var maxValue = db.Products.Max(x => x.ViewCount);
             return db.Products.Where(x => x.Status == true).OrderByDescending(x => x.ViewCount).Take(top).ToList();
         }
+
         public List<Product> ListRelatedProducts(long productId)
         {
             var product = db.Products.Find(productId);
             return db.Products.Where(x => x.ID != productId && x.CategoryID == product.CategoryID).ToList();
         }
+
         public Product ViewDetailAdmin(long id)
         {
             return db.Products.Find(id);
         }
+
         public Product ViewDetail(long id)
         {
             var model = db.Products.Find(id);
             model.ViewCount++;
             db.SaveChanges();
             return model;
+        }
+
+        public Product ViewItemCart(long id)
+        {
+            return db.Products.Find(id);
         }
 
         public long Insert(Product entity)
@@ -123,14 +136,15 @@ namespace Model.DAO
             db.SaveChanges();
             return entity.ID;
         }
+
         public int? InsertViewCount(Product entity)
         {
             var product = db.Products.Find(entity.ID);
             product.ViewCount = entity.ViewCount;
             db.SaveChanges();
             return product.ViewCount + 1;
-
         }
+
         public bool Update(Product entity)
         {
             try
@@ -144,7 +158,7 @@ namespace Model.DAO
                 product.Price = entity.Price;
                 product.CategoryID = entity.CategoryID;
                 product.Detail = entity.Detail;
-               
+
                 product.Status = entity.Status;
                 product.ModifiedBy = entity.ModifiedBy;
                 product.ModifiedDate = DateTime.Now;
@@ -157,8 +171,8 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public IEnumerable<Product> ListPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Product> model = db.Products;
@@ -183,12 +197,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public List<Product> ListAllProduct()
         {
             return db.Products.OrderByDescending(x => x.CreateDate).ToList();
         }
+
         public void UpdateImages(long productId, string images)
         {
             var product = db.Products.Find(productId);

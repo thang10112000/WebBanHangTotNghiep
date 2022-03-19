@@ -10,16 +10,18 @@ namespace Model.DAO
 {
     public class AboutDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public AboutDao()
         {
-            db = new ShopOnline();
-
+            db = new ShopBanHangDbContext();
         }
+
         public List<About> ListAll()
         {
             return db.Abouts.Where(x => x.Status == true).ToList();
         }
+
         public bool ChangeStatus(long id)
         {
             var about = db.Abouts.Find(id);
@@ -27,7 +29,6 @@ namespace Model.DAO
             db.SaveChanges();
             return about.Status;
         }
-
 
         public About GetByID(long id)
         {
@@ -56,14 +57,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
-
 
         public About ViewDetail(long id)
         {
             return db.Abouts.Find(id);
         }
+
         public IEnumerable<About> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<About> model = db.Abouts;
@@ -76,12 +76,12 @@ namespace Model.DAO
 
         public long Insert(About entity)
         {
-
             db.Abouts.Add(entity);
             entity.CreatedDate = DateTime.Now;
             db.SaveChanges();
             return entity.ID;
         }
+
         public bool Delete(int id)
         {
             try
@@ -95,7 +95,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
     }
 }

@@ -74,3 +74,4 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder.pdb
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_FileEditor.pdb
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_Watermark.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.csproj.CopyComplete

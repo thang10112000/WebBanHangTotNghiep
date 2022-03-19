@@ -9,7 +9,6 @@ namespace Model.EF
     [Table("About")]
     public partial class About
     {
-       
         public long ID { get; set; }
 
         [StringLength(250)]

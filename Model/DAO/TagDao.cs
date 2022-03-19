@@ -10,16 +10,18 @@ namespace Model.DAO
 {
     public class TagDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public TagDao()
         {
-            db = new ShopOnline();
+            db = new ShopBanHangDbContext();
         }
 
         public List<Tag> ListTag()
         {
             return db.Tags.ToList();
         }
+
         public IEnumerable<Tag> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Tag> model = db.Tags;
@@ -29,6 +31,7 @@ namespace Model.DAO
             }
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
+
         public bool Delete(string id)
         {
             try
@@ -42,8 +45,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
-
     }
 }

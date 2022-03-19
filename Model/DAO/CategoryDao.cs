@@ -10,18 +10,20 @@ namespace Model.DAO
 {
     public class CategoryDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public CategoryDao()
         {
-            db = new ShopOnline();
-
+            db = new ShopBanHangDbContext();
         }
+
         public long Insert(Category category)
         {
             db.Categories.Add(category);
             db.SaveChanges();
             return category.ID;
         }
+
         public bool ChangeStatus(long id)
         {
             var category = db.Categories.Find(id);
@@ -29,10 +31,12 @@ namespace Model.DAO
             db.SaveChanges();
             return category.Status;
         }
+
         public List<Category> ListAll()
         {
             return db.Categories.Where(x => x.Status == true).ToList();
         }
+
         public bool Update(Category entity)
         {
             try
@@ -56,7 +60,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
 
         public bool Delete(int id)
@@ -72,12 +75,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public Category ViewDetail(long id)
         {
             return db.Categories.Find(id);
         }
+
         public IEnumerable<Category> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Category> model = db.Categories;

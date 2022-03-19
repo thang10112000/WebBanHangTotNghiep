@@ -10,15 +10,18 @@ namespace Model.DAO
 {
     public class MenuDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public MenuDao()
         {
-            db = new ShopOnline();
+            db = new ShopBanHangDbContext();
         }
+
         public List<Menu> ListByGroupId(int groupId)
         {
             return db.Menus.Where(x => x.TypeID == groupId && x.Status == true).OrderBy(x => x.DisplayOrder).ToList();
         }
+
         public long Insert(Menu entity)
         {
             db.Menus.Add(entity);
@@ -47,14 +50,13 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
-
 
         public Menu ViewDetail(int id)
         {
             return db.Menus.Find(id);
         }
+
         public IEnumerable<Menu> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Menu> model = db.Menus;
@@ -78,8 +80,8 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public bool ChangeStatus(long id)
         {
             var menu = db.Menus.Find(id);
@@ -87,7 +89,5 @@ namespace Model.DAO
             db.SaveChanges();
             return menu.Status;
         }
-
     }
 }
-

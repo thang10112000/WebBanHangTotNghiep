@@ -10,22 +10,23 @@ namespace Model.DAO
 {
     public class FeedbackDao
     {
-        ShopOnline db = null;
+        private ShopBanHangDbContext db = null;
+
         public FeedbackDao()
         {
-            db = new ShopOnline();
-
+            db = new ShopBanHangDbContext();
         }
-      
+
         public IEnumerable<Feedback> ListAllPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Feedback> model = db.Feedbacks;
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.Name.Contains(searchString) );
+                model = model.Where(x => x.Name.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+
         public bool Delete(int id)
         {
             try
@@ -39,7 +40,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
     }
 }
