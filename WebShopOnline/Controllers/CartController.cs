@@ -1,7 +1,9 @@
-﻿using Model.DAO;
+﻿using Common;
+using Model.DAO;
 using Model.EF;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -125,12 +127,15 @@ namespace WebShopOnline.Controllers
         public ActionResult Payment(string shipName, string mobile, string address, string email, string content)
         {
             var order = new Order();
+
             order.CreatedDate = DateTime.Now;
             order.ShipAddress = address;
             order.ShipMobile = mobile;
             order.ShipName = shipName;
             order.ShipEmail = email;
             order.Content = content;
+            //order.Product = products;
+            //order.Quality = quality;
 
             try
             {
@@ -145,23 +150,27 @@ namespace WebShopOnline.Controllers
                     orderDetail.OrderID = id;
                     orderDetail.Price = item.Product.Price;
                     orderDetail.Quantity = item.Quantity;
+
                     detailDao.Insert(orderDetail);
 
                     total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
-                string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/neworder.html"));
+                string contents = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/neworder.html"));
 
-                content = content.Replace("{{CustomerName}}", shipName);
-                content = content.Replace("{{Phone}}", mobile);
-                content = content.Replace("{{Email}}", email);
-                content = content.Replace("{{Address}}", address);
-                content = content.Replace("{{Total}}", total.ToString("N0"));
+                contents = contents.Replace("{{CustomerName}}", shipName);
+                // contents = contents.Replace("{{Products}}", products);
+                //contents = contents.Replace("{{Quality}}", quality);
+                contents = contents.Replace("{{Phone}}", mobile);
+                contents = contents.Replace("{{Email}}", email);
+                contents = contents.Replace("{{Address}}", address);
+                contents = contents.Replace("{{Total}}", total.ToString("N0"));
+                 contents = contents.Replace("{{Content}}", content);
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-                new MailHelper().SendMail(email, "Đơn hàng mới từ OnlineShop", content);
-                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
+                new MailHelper().SendMail(email, "Đơn hàng mới từ Shop", contents);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ Shop", contents);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //ghi log
                 return Redirect("/loi-thanh-toan");

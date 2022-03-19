@@ -3365,6 +3365,7 @@
     <Content Include="Assets\Client\plugins\slick\slick\slick.min.js" />
     <Content Include="Assets\Client\resources\css\elements\_pagination.css" />
     <Content Include="Assets\Client\resources\js\custom.js" />
+    <Content Include="Assets\Client\template\neworder.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />

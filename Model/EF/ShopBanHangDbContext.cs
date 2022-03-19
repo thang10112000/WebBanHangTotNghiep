@@ -96,6 +96,10 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
+                .Property(e => e.Quantity)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Order>()
                 .Property(e => e.ShipMobile)
                 .IsUnicode(false);
 
