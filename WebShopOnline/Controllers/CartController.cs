@@ -164,7 +164,7 @@ namespace WebShopOnline.Controllers
                 contents = contents.Replace("{{Email}}", email);
                 contents = contents.Replace("{{Address}}", address);
                 contents = contents.Replace("{{Total}}", total.ToString("N0"));
-                 contents = contents.Replace("{{Content}}", content);
+                contents = contents.Replace("{{Content}}", content);
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                 new MailHelper().SendMail(email, "Đơn hàng mới từ Shop", contents);

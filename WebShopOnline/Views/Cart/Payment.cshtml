@@ -52,6 +52,7 @@
                             </header>
                             @foreach (var item in Model)
                             {
+
                                 <div class="content">
                                     <table class="table ps-checkout__products">
                                         <thead>
@@ -70,7 +71,18 @@
                                 </div>
                             }
                             <footer>
-                                <h3>Payment Method</h3>
+                                @if (Model.Count > 0)
+                                {<h3 class="col-md-8">
+                                        Tổng hóa đơn:
+                                    </h3>
+                                    <h3 class="col-md-2">
+                                        @Model.Sum(i => ((i.Product.Price.GetValueOrDefault(0) * i.Quantity)))
+                                    </h3>
+                                }
+                                else
+                                {
+
+                                }
                                 @*<div class="form-group cheque">
                                         <div class="ps-radio">
                                             <input class="form-control" type="radio" id="rdo01" name="payment" checked>

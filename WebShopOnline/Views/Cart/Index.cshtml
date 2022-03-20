@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layouts.cshtml";
+
 }
 @section jsFooter{
 
@@ -29,7 +30,7 @@
                             <tr>
                                 <td>
                                     <a class="ps-product__preview" href="product-detail.html">
-                                        <img class="mr-15" src="@item.Product.Image" alt="@item.Product.Name">@item.Product.Name
+                                        <img class="mr-15 sizeimg1" src="@item.Product.Image" alt="@item.Product.Name">@item.Product.Name
                                     </a>
                                 </td>
                                 <td>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</td>
@@ -69,8 +70,22 @@
 
                 <div class="ps-cart__total">
                     <button id="btnUpdate" class="ps-btn ps-btn--gray">Cập nhập giỏ hàng</button>
+                    @if (Model.Count > 0)
+                    {
+                        <h3>
+                            Tổng: <span>
 
-                    <h3>Total Price: <span> 2599.00 $</span></h3><a class="ps-btn" id="btnPayment">Thanh toán<i class="ps-icon-next"></i></a>
+                                @Model.Sum(
+
+                            i => ((i.Product.Price.GetValueOrDefault(0) * i.Quantity)))
+                            </span>
+                        </h3>
+                    }
+                    else
+                    {
+
+                    }
+                    <a class="ps-btn" id="btnPayment">Thanh toán<i class="ps-icon-next"></i></a>
                 </div>
             </div>
         </div>

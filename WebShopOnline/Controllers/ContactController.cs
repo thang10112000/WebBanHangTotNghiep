@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace WebShopOnline.Controllers
         // GET: Contact
         public ActionResult Index()
         {
-            return View();
+            var model = new ContactDao().GetActiveContact();
+            return View(model);
         }
     }
 }

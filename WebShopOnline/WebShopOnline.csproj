@@ -3941,6 +3941,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\Payment.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3948,7 +3949,6 @@
     <Folder Include="Areas\Data\" />
     <Folder Include="Data\" />
     <Folder Include="Views\About\" />
-    <Folder Include="Views\Contact\" />
     <Folder Include="Views\Content\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

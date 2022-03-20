@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layouts.cshtml";
     var slides = (List<Model.EF.Slide>)ViewBag.Slides;
@@ -49,7 +48,8 @@
                                 <div class="ps-shoe mb-30">
                                     <div class="ps-shoe__thumbnail">
                                         <div class="ps-badge"><span>New</span></div>
-                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a class="ps-shoe__favorite" href="#">
+                                        <div class="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div>
+                                        <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1">
                                             <i class="ps-icon-heart"></i>
                                         </a>
                                         <img src="@item.Image" alt="@item.Name"><a class="ps-shoe__overlay" href="@url"></a>
@@ -71,17 +71,18 @@
                                             @if (item.PromotionPrice != null)
                                             {
                                                 <span class="ps-shoe__price">
-                                                    <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del> 
-                                                   @item.PromotionPrice đ
+                                                    <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                                    @item.PromotionPrice đ
                                                 </span>
 
-                                            }else{
-                                        <span class="ps-shoe__price">
-                                           
-                                            @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
-                                        </span>
                                             }
+                                            else
+                                            {
+                                                <span class="ps-shoe__price">
 
+                                                    @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                                </span>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -308,6 +309,3 @@
         </div>
     </div>
 </div>
-
-
-
