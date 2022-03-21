@@ -1,6 +1,5 @@
 ﻿@model List<Model.EF.Menu>
 
-
 @{ var session = (UserLogin)Session[WebShopOnline.Common.CommonConstants.USER_SESSION]; }
 @if (session == null)
 {
@@ -16,15 +15,14 @@
 else
 {
     <div class="header__actions">
-        <a href="#">Login & Regiser</a>
+        <a href="#">Thông tin tài khoản</a>
         <div class="btn-group ps-dropdown">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Xin Chào: @session.UserName<i class="fa fa-angle-down"></i></a>
             <ul class="dropdown-menu">
                 @*<li><a href="#"><img src="images/flag/usa.svg" alt=""> USD</a></li>
-                <li><a href="#"><img src="images/flag/singapore.svg" alt=""> SGD</a></li>*@
+                    <li><a href="#"><img src="images/flag/singapore.svg" alt=""> SGD</a></li>*@
                 <li>   @Html.ActionLink("Đăng xuất", "Logout", "User")</li>
             </ul>
         </div>
-
     </div>
 }
