@@ -5,12 +5,12 @@
 }
 
 @section jsFooter{
-
+    <script src="/Assets/Client/js/controller/contactController.js"></script>
 }
 
 <div class="ps-contact ps-section pb-80">
     <div id="contact-map" data-address="New York, NY" data-title="Sky Store!" data-zoom="17">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d304.0404774235827!2d106.74962199296657!3d10.945725686495779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e3!4m0!4m5!1s0x3174d9930ce3da0d%3A0xd760398e87d27adc!2zS2h1IHBo4buRIFTDom4gUGjGsOG7m2MsIFTDom4gQsOsbmgsIETEqSBBbiwgQsOsbmggRMawxqFuZywgVmnhu4d0IE5hbQ!3m2!1d10.9459266!2d106.7494588!5e0!3m2!1svi!2s!4v1647783209148!5m2!1svi!2s"
+        <iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d608.0812526295782!2d106.7495255525855!3d10.945580604870216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e3!4m0!4m3!3m2!1d10.9456714!2d106.7495539!5e0!3m2!1svi!2s!4v1647828626618!5m2!1svi!2s"
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
     <div class="ps-container">
@@ -18,27 +18,39 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
                 <div class="ps-section__header mb-50">
                     <h2 class="ps-section__title" data-mask="Contact">- Liên hệ</h2>
-                    <form class="ps-contact__form" action="do_action" method="post">
+                    <form class="ps-contact__form">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <div class="form-group">
-                                    <label>Name <sub>*</sub></label>
-                                    <input class="form-control" type="text" placeholder="">
+                                    <label>Họ Và Tên <sub>*</sub></label>
+                                    <input class="form-control" id="txtName" type="text" placeholder="Nhập tên của bạn...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label>Điện thoại <sub>*</sub></label>
+                                    <input class="form-control" id="txtMobile" type="text" placeholder="Nhập số điện thoại...">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <div class="form-group">
                                     <label>Email <sub>*</sub></label>
-                                    <input class="form-control" type="email" placeholder="">
+                                    <input id="txtEmail" class="form-control" type="text" placeholder="Nhập Email của bạn...">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <div class="form-group">
+                                    <label>Địa chỉ <sub>*</sub></label>
+                                    <input id="txtAddress" class="form-control" type="text" placeholder="Nhập địa chỉ...">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                 <div class="form-group mb-25">
-                                    <label>Your Message <sub>*</sub></label>
-                                    <textarea class="form-control" rows="6"></textarea>
+                                    <label>Thông tin phản hồi<sub>*</sub></label>
+                                    <textarea class="form-control" id="txtContent" rows="6" placeholder="Nhập lời nhắn của bạn..."></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button class="ps-btn">Gửi tin nhắn<i class="ps-icon-next"></i></button>
+                                    <button id="btnSend" class="ps-btn">Gửi tin nhắn<i class="ps-icon-next"></i></button>
                                 </div>
                             </div>
                         </div>

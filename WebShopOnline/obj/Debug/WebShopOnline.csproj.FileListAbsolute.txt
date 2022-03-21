@@ -75,3 +75,7 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_FileEditor.pdb
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\CKFinder_Watermark.pdb
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\obj\Debug\WebShopOnline.csproj.CopyComplete
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\BotDetect.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\BotDetect.Web.Mvc.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.Data.SQLite.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.Data.SQLite.xml
