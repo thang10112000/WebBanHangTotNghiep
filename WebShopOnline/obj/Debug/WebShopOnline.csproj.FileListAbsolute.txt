@@ -79,3 +79,5 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\BotDetec
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\BotDetect.Web.Mvc.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.Data.SQLite.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.Data.SQLite.xml
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Facebook.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Facebook.xml
