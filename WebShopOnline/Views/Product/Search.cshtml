@@ -1,0 +1,168 @@
+﻿@model List<Model.ViewModel.ProductViewModel>
+@{
+
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+<div class="ps-products-wrap pt-80 pb-80">
+    <div class="ps-products" data-mh="product-listing">
+        <div class="ps-product-action">
+            <div class="ps-product__filter">
+                <h3 class="ps-section__title" data-mask="Search">Kết quả tìm kiếm: @ViewBag.Keyword</h3>
+            </div>
+        </div>
+
+        @if (Model.Count > 0)
+        {<div class="ps-product-action">
+                <div class="ps-product__filter">
+                    <select class="ps-select selectpicker">
+                        <option value="1">Sắp xếp  theo</option>
+                        <option value="2">Bán chạy</option>
+                        <option value="3">Giá (Thấp ➞ Cao )</option>
+                        <option value="3">Giá (Cao ➞ Thấp)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ps-product__columns">
+
+                @foreach (var item in Model)
+                {
+                    var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="ps-product__column">
+                        <div class="ps-shoe mb-30">
+                            <div class="ps-shoe__thumbnail">
+                                <a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a>
+                                <img class="sizeimg" src="@item.Images" alt="@item.Name"><a class="ps-shoe__overlay" href="@link"></a>
+                            </div>
+                            <div class="ps-shoe__content">
+                                @*<div class="ps-shoe__variants">
+                                        <div class="ps-shoe__variant normal"><img src="images/shoe/2.jpg" alt=""><img src="images/shoe/3.jpg" alt=""><img src="images/shoe/4.jpg" alt=""><img src="images/shoe/5.jpg" alt=""></div>
+                                        <select class="ps-rating ps-shoe__rating">
+                                            <option value="1">1</option>
+                                            <option value="1">2</option>
+                                            <option value="1">3</option>
+                                            <option value="1">4</option>
+                                            <option value="2">5</option>
+                                        </select>
+                                    </div>*@
+                                <div class="ps-shoe__detail">
+                                    <a class="ps-shoe__name" href="@link">@item.Name</a>
+                                    <p class="ps-shoe__categories"><a href="@link"> Xem sản phẩm</a></p>
+                                    @if (item.PromotionPrice != null)
+                                    {
+                                        <span class="ps-shoe__price">
+                                            <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                            @item.PromotionPrice đ
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="ps-shoe__price">
+                                            @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!--Phân trang-->
+            if (ViewBag.TotalPage > 1)
+            {
+                var pageDisplay = (int)ViewBag.MaxPage;
+                int totalPage = (int)ViewBag.TotalPage;
+                int currentPage = ((int)ViewBag.Page);
+
+                // Create numeric links
+                var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                var link = "/tim-kiem?keyword=" + ViewBag.Keyword;
+                <div class="ps-product-action">
+                    <div class="ps-pagination">
+                        <ul class="pagination">
+                            @if (currentPage > ViewBag.First)
+                            {
+                                <li><a href="@link&page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                <li>
+                                    <a href="@link&page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                            }
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (currentPage == i)
+                                {
+                                    <li> <a href="@link&page=@i" class="active" title="Trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@link&page=@i" class="active" title="Trang @i">@i</a></li>
+                                }
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@link&page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                <li> <a href="@link&page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>}
+        }
+
+        else
+        {
+            <div>
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        <h5>
+                            Không có sản phẩm nào!
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="ps-sidebar" data-mh="product-listing">
+        <aside class="ps-widget--sidebar ps-widget--category">
+            <div class="ps-widget__header">
+                <h3>Category</h3>
+            </div>
+            <div class="ps-widget__content">
+                <ul class="ps-list--checked">
+                    <li class="current"><a href="product-listing.html">Life(521)</a></li>
+                    <li><a href="product-listing.html">Running(76)</a></li>
+                    <li><a href="product-listing.html">Baseball(21)</a></li>
+                    <li><a href="product-listing.html">Football(105)</a></li>
+                    <li><a href="product-listing.html">Soccer(108)</a></li>
+                    <li><a href="product-listing.html">Trainning & game(47)</a></li>
+                    <li><a href="product-listing.html">More</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        @*aside.ps-widget--sidebar
+                .ps-widget__header: h3 Ads Banner
+                .ps-widget__content
+                    a(href='product-listing'): img(src="images/offer/sidebar.jpg" alt="")
+
+            aside.ps-widget--sidebar
+                .ps-widget__header: h3 Best Seller
+                .ps-widget__content
+                    - for (var i = 0; i < 3; i ++)
+                        .ps-shoe--sidebar
+                            .ps-shoe__thumbnail
+                                a(href='#')
+                                img(src="images/shoe/sidebar/"+(i+1)+".jpg" alt="")
+                            .ps-shoe__content
+                                if i == 1
+                                    a(href='#').ps-shoe__title Nike Flight Bonafide
+                                else if i == 2
+                                    a(href='#').ps-shoe__title Nike Sock Dart QS
+                                else
+                                    a(href='#').ps-shoe__title Men's Sky
+                                p <del> £253.00</del> £152.00
+                                a(href='#').ps-btn PURCHASE*@
+    </div>
+</div>

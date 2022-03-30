@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="/Assets/Client/plugins/revolution/css/settings.css">
     <link rel="stylesheet" href="/Assets/Client/plugins/revolution/css/layers.css">
     <link rel="stylesheet" href="/Assets/Client/plugins/revolution/css/navigation.css">
+
+    <!-- Link tự nhúng-->
     <!-- Custom-->
     <link rel="stylesheet" href="/Assets/Client/css/style.css">
     <!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
@@ -67,8 +69,8 @@
                     @{Html.RenderAction("MainMenu", "Home"); }
                 </div>
                 <div class="navigation__column right">
-                    <form class="ps-search--header" action="do_action" method="post">
-                        <input class="form-control" type="text" placeholder="Search Product…">
+                    <form class="ps-search--header" action="/tim-kiem" method="get">
+                        <input class="form-control" id="txtKeyword" name="keyword" type="text" placeholder="Tìm kiếm…">
                         <button><i class="ps-icon-search"></i></button>
                     </form>
                     <div class="ps-cart">
@@ -201,6 +203,7 @@
         </div>
     </main>
     <!-- JS Library-->
+
     <script type="text/javascript" src="/Assets/Client/plugins/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
@@ -225,6 +228,8 @@
     <script type="text/javascript" src="/Assets/Client/plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/plugins/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+
+    <!-- js tự nhúng-->
     <!-- Custom scripts-->
     <script type="text/javascript" src="/Assets/Client/js/main.js"></script>
     @RenderSection("jsFooter", required: false)

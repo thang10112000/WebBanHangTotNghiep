@@ -16,10 +16,8 @@ namespace WebShopOnline.Controllers
             var model = new ProductDao().ListAllPaging(searchString, page, pageSize);
             int totalRecord = 0;
 
-
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
-
 
             int maxPage = 5;
             int totalPage = 0;
@@ -33,6 +31,7 @@ namespace WebShopOnline.Controllers
             ViewBag.Prev = page - 1;
             return View(model);
         }
+
         [ChildActionOnly]
         [OutputCache(Duration = 3600 * 24)]
         public PartialViewResult ProductCategory()
@@ -40,6 +39,7 @@ namespace WebShopOnline.Controllers
             var model = new ProductCategoryDao().ListAll();
             return PartialView(model);
         }
+
         [ChildActionOnly]
         [OutputCache(Duration = 3600 * 24)]
         public PartialViewResult ProductCategory2()
@@ -47,6 +47,7 @@ namespace WebShopOnline.Controllers
             var model = new ProductCategoryDao().ListAll();
             return PartialView(model);
         }
+
         public JsonResult ListName(string q)
         {
             var data = new ProductDao().ListName(q);
@@ -56,9 +57,9 @@ namespace WebShopOnline.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Category(long cateId, int page = 1, int pageSize = 1)
         {
-
             var category = new ProductCategoryDao().ViewDetail(cateId);
             ViewBag.Category = category;
             int totalRecord = 0;
@@ -80,6 +81,7 @@ namespace WebShopOnline.Controllers
             ViewBag.Prev = page - 1;
             return View(model);
         }
+
         public ActionResult Search(string keyword, int page = 1, int pageSize = 1)
         {
             int totalRecord = 0;
@@ -101,6 +103,7 @@ namespace WebShopOnline.Controllers
 
             return View(model);
         }
+
         //[OutputCache(CacheProfile = "Cache1DayForProduct")]
         public ActionResult Detail(long id)
         {
@@ -109,9 +112,9 @@ namespace WebShopOnline.Controllers
             ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id);
             return View(product);
         }
+
         //public ActionResult Detail(long id)
         //{
-
         //    var product = new ProductDao().ViewDetail(id);
 
         //    var images = product.MoreImages;
@@ -128,6 +131,5 @@ namespace WebShopOnline.Controllers
         //    //ViewBag.loadImage = listImagesReturn;
         //    return View(product);
         //}
-
     }
 }

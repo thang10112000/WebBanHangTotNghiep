@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Model.EF.Content>
+@{
+    var listContents = (List<Model.EF.Content>)ViewBag.NewContents;
+    var listall = (List<Model.EF.Tag>)ViewBag.TagAll;
+    ViewBag.Title = "Tổng hợp tin tức";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+<div class="ps-blog-grid pt-80 pb-80">
+    <div class="ps-container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+                @foreach (var item in Model)
+                {
+                    var link = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                    <div class="ps-post--2">
+                        <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="@link"></a><img src="@item.Image" class="" width="450" height="250" alt="@item.Name"></div>
+                        <div class="ps-post__container">
+                            <header class="ps-post__header">
+                                <a class="ps-post__title" href="@link">@item.Name</a>
+                                <p>Posted by <a href="#">@item.CreatedBy</a> on @item.CreatedDate  </p>
+                            </header>
+                            <div class="ps-post__content">
+                                <p>@item.Description</p>
+                            </div>
+                            <footer class="ps-post__footer">
+                                <a class="ps-post__morelink" href="@link">Xem chi tiết<i class="ps-icon-arrow-left"></i></a>
+                                <div class="ps-post__actions">
+                                    <span><i class="fa fa-comments"></i> 23 Comments</span><span><i class="fa fa-heart"></i>  likes</span>
+                                    @*<div class="ps-post__social">
+                                            <i class="fa fa-share-alt"></i><a href="#">Share</a>
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            </ul>
+                                        </div>*@
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                }
+                <div class="mt-30">
+                    <!--Phân trang-->
+                    @if (ViewBag.TotalPage > 1)
+                    {
+                        var pageDisplay = (int)ViewBag.MaxPage;
+                        int totalPage = (int)ViewBag.TotalPage;
+                        int currentPage = ((int)ViewBag.Page);
+
+                        // Create numeric links
+                        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                        var link = "/tin-tuc/";
+
+                        <div class="ps-pagination">
+                            <ul class="pagination">
+                                @if (currentPage > ViewBag.First)
+                                {
+                                    <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li>
+                                        <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                }
+                                @for (int i = startPageIndex; i <= endPageIndex; i++)
+                                {
+                                    if (currentPage == i)
+                                    {
+                                        <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                                    }
+                                }
+                                @if (currentPage < totalPage)
+                                {
+                                    <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                                    <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <div class="card bg-danger text-white shadow">
+                                <div class="card-body">
+                                    <h5>
+                                        Đã là trang cuối!
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+
+                <aside class="ps-widget--sidebar">
+                    <div class="ps-widget__header">
+                        <h3>Tin mới</h3>
+                    </div>
+                    <div class="ps-widget__content">
+                        @foreach (var item in listContents)
+                        {
+                            var link = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                            <div class="ps-post--sidebar">
+                                <div class="ps-post__thumbnail"><a href="@link"></a><img src="@item.Image" alt="@item.Name"></div>
+                                <div class="ps-post__content"><a class="ps-post__title" href="@link">@item.Name</a><span>@item.CreatedDate</span></div>
+                            </div>
+                        }
+                    </div>
+                </aside>
+
+                <aside class="ps-widget--sidebar">
+                    <div class="ps-widget__header">
+                        <h3>Tags</h3>
+                    </div>
+                    <div class="ps-widget__content">
+                        <ul class="ps-tags">
+                            @foreach (var item in listall)
+                            {
+                                <li><a href="/tag/@item.ID">@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

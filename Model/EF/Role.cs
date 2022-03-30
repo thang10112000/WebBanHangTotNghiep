@@ -9,6 +9,7 @@ namespace Model.EF
     [Table("Role")]
     public partial class Role
     {
+        [Key]
         [StringLength(50)]
         public string ID { get; set; }
 

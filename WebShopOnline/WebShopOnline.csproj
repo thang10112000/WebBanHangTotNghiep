@@ -3207,8 +3207,11 @@
     <Content Include="Assets\Client\images\user\3.jpg" />
     <Content Include="Assets\Client\images\user\4.jpg" />
     <Content Include="Assets\Client\images\user\5.jpg" />
+    <Content Include="Assets\Client\js\controller\baseController.js" />
     <Content Include="Assets\Client\js\controller\cartController.js" />
     <Content Include="Assets\Client\js\controller\contactController.js" />
+    <Content Include="Assets\Client\js\jquery-ui.css" />
+    <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\main.js" />
     <Content Include="Assets\Client\js\shoe-variants.js" />
     <Content Include="Assets\Client\plugins\animate.css\animate.min.css" />
@@ -3925,6 +3928,8 @@
     <Content Include="Assets\Client\resources\sass\vendor\_hover_effect.scss" />
     <Content Include="Assets\Client\resources\sass\vendor\_masonry_grid.scss" />
     <Content Include="Assets\Client\resources\sass\vendor\_media_query.scss" />
+    <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_401.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3960,6 +3965,10 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Views\Content\Detail.cshtml" />
+    <Content Include="Views\Content\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3967,7 +3976,6 @@
     <Folder Include="Areas\Data\" />
     <Folder Include="Data\" />
     <Folder Include="Views\About\" />
-    <Folder Include="Views\Content\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

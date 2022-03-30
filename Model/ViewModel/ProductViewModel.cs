@@ -16,6 +16,7 @@ namespace Model.ViewModel
         public string MoreImages { get; set; }
         public string Link { set; get; }
         public decimal? Price { set; get; }
+        public decimal? PromotionPrice { get; set; }
         public long? CategoryID { get; set; }
         public string CateName { set; get; }
         public string CateMetaTitle { set; get; }
