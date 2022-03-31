@@ -29,6 +29,7 @@ namespace WebShopOnline.Areas.Admin.Controllers
             SetViewBag();
             return View();
         }
+
         [HttpPost]
         [HasCredential(RoleID = "ADD_USER")]
         [ValidateInput(false)]
@@ -51,14 +52,15 @@ namespace WebShopOnline.Areas.Admin.Controllers
             SetViewBag();
             return View("Index");
         }
+
         [HasCredential(RoleID = "EDIT_USER")]
         public ActionResult Edit(int id)
         {
-
             var product = new ProductDao().ViewDetail(id);
             SetViewBag(product.CategoryID);
             return View(product);
         }
+
         [HttpPost]
         [HasCredential(RoleID = "EDIT_USER")]
         [ValidateInput(false)]
@@ -81,12 +83,14 @@ namespace WebShopOnline.Areas.Admin.Controllers
             SetViewBag(product.CategoryID);
             return View("Index");
         }
+
         [HasCredential(RoleID = "DELETE_USER")]
         public ActionResult Delete(int id)
         {
             new ProductDao().Delete(id);
             return RedirectToAction("Index");
         }
+
         public JsonResult LoadImages(long id)
         {
             ProductDao dao = new ProductDao();
@@ -134,8 +138,8 @@ namespace WebShopOnline.Areas.Admin.Controllers
                     status = false
                 });
             }
-
         }
+
         [HttpPost]
         [HasCredential(RoleID = "EDIT_USER")]
         public JsonResult ChangeStatus(long id)
@@ -146,6 +150,7 @@ namespace WebShopOnline.Areas.Admin.Controllers
                 status = result
             });
         }
+
         [HasCredential(RoleID = "EDIT_USER")]
         public void SetViewBag(long? selectedId = null)
         {

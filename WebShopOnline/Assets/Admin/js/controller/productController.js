@@ -8,7 +8,6 @@
             $('#imagesManage').modal('show');
             $('#hidProductID').val($(this).data('id'));
             product.loadImages();
-
         });
 
         $('#btnChooImages').off('click').on('click', function (e) {
@@ -21,7 +20,6 @@
                     e.preventDefault();
                     $(this).parent().remove();
                 });
-
             };
             finder.popup();
         });
@@ -59,7 +57,6 @@
             type: 'GET',
             data: {
                 id: $('#hidProductID').val(),
-
             },
             dataType: 'json',
             success: function (response) {
@@ -77,43 +74,6 @@
 
                 //thong bao thanh cong
             }
-        });
-    }
-
-
-
-
-
-
-
-}
-product.init();
-
-// gọi ajax kích hoạt , khóa status
-var product = {
-    init: function () {
-        product.registerEvents();
-    },
-    registerEvents: function () {
-        $('.btn-active').off('click').on('click', function (e) {
-            e.preventDefault();
-            var btn = $(this)
-            var id = btn.data('id');
-            $.ajax({
-                url: "/Admin/Product/ChangeStatus",
-                data: { id: id },
-                dataType: "json",
-                type: "POST",
-
-                success: function (response) {
-                    console.log(response);
-                    if (response.status == true) {
-                        btn.text('Kích hoạt');
-                    } else {
-                        btn.text('Khóa');
-                    }
-                }
-            });
         });
     }
 }

@@ -1,7 +1,7 @@
-﻿// gọi ajax
-var menu = {
+﻿// gọi ajax kích hoạt , khóa status
+var product2 = {
     init: function () {
-        menu.registerEvents();
+        product2.registerEvents();
     },
     registerEvents: function () {
         $('.btn-active').off('click').on('click', function (e) {
@@ -9,7 +9,7 @@ var menu = {
             var btn = $(this)
             var id = btn.data('id');
             $.ajax({
-                url: "/Admin/Content/ChangeStatus",
+                url: "/Admin/Product/ChangeStatus",
                 data: { id: id },
                 dataType: "json",
                 type: "POST",
@@ -26,4 +26,4 @@ var menu = {
         });
     }
 }
-menu.init();
+product2.init();

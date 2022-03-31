@@ -213,6 +213,7 @@
     <Content Include="Assets\Admin\js\controller\menuController.js" />
     <Content Include="Assets\Admin\js\controller\productCategoryController.js" />
     <Content Include="Assets\Admin\js\controller\productController.js" />
+    <Content Include="Assets\Admin\js\controller\productController2.js" />
     <Content Include="Assets\Admin\js\controller\slideController.js" />
     <Content Include="Assets\Admin\js\controller\userController.js" />
     <Content Include="Assets\Admin\js\demo\chart-area-demo.js" />
@@ -3930,6 +3931,8 @@
     <Content Include="Assets\Client\resources\sass\vendor\_media_query.scss" />
     <Content Include="Areas\Admin\Views\Content\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_401.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
