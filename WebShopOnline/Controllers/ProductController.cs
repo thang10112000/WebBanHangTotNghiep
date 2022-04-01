@@ -105,31 +105,31 @@ namespace WebShopOnline.Controllers
         }
 
         //[OutputCache(CacheProfile = "Cache1DayForProduct")]
-        public ActionResult Detail(long id)
-        {
-            var product = new ProductDao().ViewDetail(id);
-            ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID.Value);
-            ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id);
-            return View(product);
-        }
-
         //public ActionResult Detail(long id)
         //{
         //    var product = new ProductDao().ViewDetail(id);
-
-        //    var images = product.MoreImages;
-        //    //XElement xImages = XElement.Parse(images);
-        //    //List<string> listImagesReturn = new List<string>();
-
-        //    //foreach (XElement element in xImages.Elements())
-        //    //{
-        //    //    listImagesReturn.Add(element.Value);
-        //    //}
-
         //    ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID.Value);
-        //    ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id); // xem sản phẩm liên quan
-        //    //ViewBag.loadImage = listImagesReturn;
+        //    ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id);
         //    return View(product);
         //}
+
+        public ActionResult Detail(long id)
+        {
+            var product = new ProductDao().ViewDetail(id);
+
+            var images = product.MoreImages;
+            XElement xImages = XElement.Parse(images);
+            List<string> listImagesReturn = new List<string>();
+
+            foreach (XElement element in xImages.Elements())
+            {
+                listImagesReturn.Add(element.Value);
+            }
+
+            ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID.Value);
+            ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id); // xem sản phẩm liên quan
+            ViewBag.loadImage = listImagesReturn;
+            return View(product);
+        }
     }
 }

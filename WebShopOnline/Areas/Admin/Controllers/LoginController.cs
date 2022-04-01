@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebShopOnline.Areas.Admin.Models;
 using WebShopOnline.Common;
 
@@ -16,6 +17,7 @@ namespace WebShopOnline.Areas.Admin.Controllers
         {
             return View();
         }
+
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)
@@ -59,5 +61,10 @@ namespace WebShopOnline.Areas.Admin.Controllers
             return View("Index");
         }
 
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

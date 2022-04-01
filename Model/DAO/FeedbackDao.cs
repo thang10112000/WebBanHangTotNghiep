@@ -27,6 +27,11 @@ namespace Model.DAO
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
 
+        public List<Product> GetAll()
+        {
+            return db.Products.ToList();
+        }
+
         public bool Delete(int id)
         {
             try

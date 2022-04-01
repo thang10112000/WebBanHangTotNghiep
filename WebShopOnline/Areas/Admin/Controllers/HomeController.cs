@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,15 @@ namespace WebShopOnline.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Order()
+        {
+            var dao = new FeedbackDao();
+            var model = dao.GetAll();
+
+            return View(model);
         }
     }
 }

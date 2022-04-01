@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layouts.cshtml";
     var category = (Model.EF.ProductCategory)ViewBag.Category;
     //var comment = Model.MetaTitle + "-" + Model.ID;
-    //var loadImage = ViewBag.loadImage;
+    var loadImage = ViewBag.loadImage;
     var relatedProducts = (List<Model.EF.Product>)ViewBag.RelatedProducts;
 }
 
@@ -25,17 +25,38 @@
                 <div class="ps-product__thumbnail">
                     <div class="ps-product__preview">
                         <div class="ps-product__variants">
-                            <div class="item"><img src="@Model.Image" alt="@Model.Name"></div>
+                            @foreach (var item in loadImage)
+                            {
+                                <div class="item">
+                                    <img src="@item" alt="@Model.Name">
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="ps-product__image">
-                        <div class="item"><img class="zoom" src="@Model.Image" alt="@Model.Name" data-zoom-image="@Model.Image"></div>
+                        @foreach (var item in loadImage)
+                        {
+                            <div class="item"><img class="zoom" src="@item" alt="@Model.Name" data-zoom-image="@item"></div>
+                        }
                     </div>
                 </div>
                 <div class="ps-product__thumbnail--mobile">
-                    <div class="ps-product__main-img"><img src="@Model.Image" alt="@Model.Name"></div>
-                    <div class="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
-                        <img src="@Model.Image" alt="@Model.Name">
+
+                    <div class="ps-product__main-img ps-product__image ">
+                        @foreach (var item in loadImage)
+                        {
+                            <div class="item"><img class="zoom" src="@item" alt="@Model.Name" data-zoom-image="@item"></div>
+                        }
+                    </div>
+
+                    <div class="ps-product__preview owl-slider " data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
+
+                        @foreach (var item in loadImage)
+                        {
+
+                            <img src="@item" alt="@Model.Name">
+
+                        }
                     </div>
                 </div>
                 <div class="ps-product__info">
