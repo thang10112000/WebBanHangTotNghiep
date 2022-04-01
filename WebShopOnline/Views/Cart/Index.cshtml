@@ -35,10 +35,13 @@
                                 </td>
                                 <td>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</td>
                                 <td>
+                                    @*<div class="form-group">
+                                            <input class="form-control txtQuantity" type="number" data-id="@item.Product.ID" value="@item.Quantity">
+                                        </div>*@
                                     <div class="form-group--number">
-                                        <button class="minus"><span>-</span></button>
-                                        <input class="form-control txtQuantity" type="text" data-id="@item.Product.ID" value="@item.Quantity">
-                                        <button class="plus"><span>+</span></button>
+                                        @*<button class="minus"><span>-</span></button>*@
+                                        <input class="form-control txtQuantity" type="number" data-id="@item.Product.ID" value="@item.Quantity">
+                                        @*<button class="plus"><span>+</span></button>*@
                                     </div>
                                 </td>
                                 <td>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</td>

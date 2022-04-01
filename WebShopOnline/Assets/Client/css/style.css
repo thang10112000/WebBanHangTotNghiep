@@ -3213,7 +3213,7 @@ textarea.form-control {
         top: -15px;
         left: -15px;
         width: calc(100% + 30px);
-        height: calc(100% + 108px);
+        height: calc(100% + 60px);
         border: 1px solid #000;
         z-index: 1000;
         visibility: hidden;
@@ -3428,8 +3428,8 @@ textarea.form-control {
     }
 
     .ps-shoe:hover .ps-shoe__content {
-        padding-top: 100px;
-        bottom: -90px;
+        padding-top: 40px;
+        bottom: -40px;
         max-height: none;
     }
 
@@ -8956,3 +8956,12 @@ html .bg--parallax {
     width: 10rem;
     image-rendering: pixelated;
     object-fit: cover;
+}
+
+.sizeimg {
+    max-width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
