@@ -25,6 +25,21 @@ namespace Model.DAO
             return entity.ID;
         }
 
+        public long InsertForGoogle(User entity)
+        {
+            var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
+            if (user == null)
+            {
+                db.Users.Add(entity);
+                db.SaveChanges();
+                return entity.ID;
+            }
+            else
+            {
+                return user.ID;
+            }
+        }
+
         public long InsertForFacebook(User entity)
         {
             var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
@@ -160,7 +175,7 @@ namespace Model.DAO
             return user.Status;
         }
 
-        public bool Delete(int id)
+        public bool Delete(long id)
         {
             try
             {
@@ -184,5 +199,10 @@ namespace Model.DAO
         {
             return db.Users.Count(x => x.Email == email) > 0;
         }
+
+        //public bool CheckLogin(long userid)
+        //{
+        //    return db.Users.Count(x => x.ID == userid ) > 0;
+        //}
     }
 }

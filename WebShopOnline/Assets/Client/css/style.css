@@ -8965,3 +8965,8 @@ html .bg--parallax {
     object-fit: cover;
     image-rendering: pixelated;
 }
+
+.rightdiv {
+    float: right;
+    width: 100px;
+}

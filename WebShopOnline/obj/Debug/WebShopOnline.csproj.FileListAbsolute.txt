@@ -81,3 +81,7 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.D
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\System.Data.SQLite.xml
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Facebook.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Facebook.xml
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Microsoft.Owin.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Owin.dll
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\Microsoft.Owin.xml
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\WebShopOnline\bin\ASPSnippets.GoogleAPI.dll

@@ -5,6 +5,12 @@
     var listNewProducts = (List<Model.EF.Product>)ViewBag.NewProducts;
     var listFeatureProducts = (List<Model.EF.Product>)ViewBag.ListFeatureProducts;
     var listContents = (List<Model.EF.Content>)ViewBag.NewContents;
+
+    //var listReview = (List<Model.EF.Review>)ViewBag.Review;
+
+    //var a = 1;
+    //float tb = 0;
+
 }
 
 @section  slide{
@@ -58,13 +64,22 @@
                                     <div class="ps-shoe__content">
                                         <div class="ps-shoe__variants">
 
-                                            <select class="ps-rating ps-shoe__rating">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                                <option value="2">5</option>
-                                            </select>
+                                            @*<div>
+                                                    @foreach (var tong in listReview)
+                                                    {
+                                                        tb = (float)tb + (float)tong.Rating;
+                                                    }
+                                                    @{
+                                                        if (listReview.Count == 0)
+                                                        {
+                                                            tb = 0;
+                                                        }
+                                                        else
+                                                        {
+                                                            tb = (int)Math.Round(tb / listReview.Count);
+                                                        }
+                                                    }
+                                                </div>*@
                                         </div>
                                         <div class="ps-shoe__detail">
                                             <a class="ps-shoe__name" href="@url">@item.Name</a>
@@ -214,11 +229,12 @@
         </div>
     </div>
 </div>
-<div class="ps-home-testimonial bg--parallax pb-80" data-background="images/background/parallax.jpg">
+
+<div class="ps-home-testimonial bg--parallax pb-80" data-background="/Assets/Client/images/teamwork.jpg">
     <div class="container">
         <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
             <div class="ps-testimonial">
-                <div class="ps-testimonial__thumbnail"><img src="images/testimonial/1.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+                <div class="ps-testimonial__thumbnail"><img src="/Assets/Client/images/ceo.jpg" alt=""><i class="fa fa-quote-left"></i></div>
                 <header>
                     <select class="ps-rating">
                         <option value="1">1</option>
@@ -227,14 +243,14 @@
                         <option value="1">4</option>
                         <option value="5">5</option>
                     </select>
-                    <p>Logan May - CEO & Founder Invision</p>
+                    <p>Lý Thượng Thắng - CEO & Nhà sáng lập</p>
                 </header>
                 <footer>
-                    <p>“Dessert pudding dessert jelly beans cupcake sweet caramels gingerbread. Fruitcake biscuit cheesecake. Cookie topping sweet muffin pudding tart bear claw sugar plum croissant. “</p>
+                    <p>“Sự hài lòng của các bạn là thành công của chúng tôi. “</p>
                 </footer>
             </div>
             <div class="ps-testimonial">
-                <div class="ps-testimonial__thumbnail"><img src="images/testimonial/2.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+                <div class="ps-testimonial__thumbnail"><img src="/Assets/Client/images/ceo.jpg" alt=""><i class="fa fa-quote-left"></i></div>
                 <header>
                     <select class="ps-rating">
                         <option value="1">1</option>
@@ -243,26 +259,10 @@
                         <option value="1">4</option>
                         <option value="5">5</option>
                     </select>
-                    <p>Logan May - CEO & Founder Invision</p>
+                    <p>Lý Thượng Thắng - CEO & Nhà sáng lập</p>
                 </header>
                 <footer>
-                    <p>“Dessert pudding dessert jelly beans cupcake sweet caramels gingerbread. Fruitcake biscuit cheesecake. Cookie topping sweet muffin pudding tart bear claw sugar plum croissant. “</p>
-                </footer>
-            </div>
-            <div class="ps-testimonial">
-                <div class="ps-testimonial__thumbnail"><img src="images/testimonial/3.jpg" alt=""><i class="fa fa-quote-left"></i></div>
-                <header>
-                    <select class="ps-rating">
-                        <option value="1">1</option>
-                        <option value="1">2</option>
-                        <option value="1">3</option>
-                        <option value="1">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <p>Logan May - CEO & Founder Invision</p>
-                </header>
-                <footer>
-                    <p>“Dessert pudding dessert jelly beans cupcake sweet caramels gingerbread. Fruitcake biscuit cheesecake. Cookie topping sweet muffin pudding tart bear claw sugar plum croissant. “</p>
+                    <p>“Sự hài lòng của các bạn là thành công của chúng tôi. “</p>
                 </footer>
             </div>
         </div>

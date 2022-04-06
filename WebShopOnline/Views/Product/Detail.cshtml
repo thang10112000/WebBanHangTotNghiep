@@ -1,18 +1,59 @@
-﻿@model Model.EF.Product
+﻿@model Model.EF.Review
 
 @{
-    ViewBag.Title = Model.Name;
-    ViewBag.Keywords = Model.MetaKeywords;
-    ViewBag.Descriptions = Model.MetaDescriptions;
+    var product = (Model.EF.Product)ViewBag.Product;
+    ViewBag.Title = product.Name;
+    ViewBag.Keywords = product.MetaKeywords;
+    ViewBag.Descriptions = product.MetaDescriptions;
     Layout = "~/Views/Shared/_Layouts.cshtml";
     var category = (Model.EF.ProductCategory)ViewBag.Category;
-
+    var session = (UserLogin)Session[WebShopOnline.Common.CommonConstants.USER_SESSION];
     //var comment = Model.MetaTitle + "-" + Model.ID;
     var loadImage = ViewBag.loadImage;
-    var relatedProducts = (List<Model.EF.Product>
-        )ViewBag.RelatedProducts;
+    var listReview = (List<Model.EF.Review>)ViewBag.Review;
+    var relatedProducts = (List<Model.EF.Product>)ViewBag.RelatedProducts;
+
+    var i = 1;
+    var a = 1;
+    float tb = 0;
 }
 
+@section jsFooter{
+    <link href="/Assets/Client/js/review/jquery.rateyo.min.css" rel="stylesheet" />
+    <script src="/Assets/Client/js/review/review.js"></script>
+    <script src="/Assets/Client/js/review/jquery.rateyo.min.js"></script>
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @foreach (var item in listReview)
+    {
+        <script>
+            $(function () {
+                $('.sao@(a)').rateYo({
+                    rating: @item.Rating,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a++;
+    }
+    <script>
+            $(function () {
+                $('#trungbinh').rateYo({
+                    rating: @tb,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+    </script>
+}
 <div class="test">
     <div class="container">
         <div class="row">
@@ -31,7 +72,7 @@
                             @foreach (var item in loadImage)
                             {
                                 <div class="item">
-                                    <img src="@item" alt="@Model.Name">
+                                    <img src="@item" alt="@product.Name">
                                 </div>
                             }
                         </div>
@@ -39,16 +80,39 @@
                     <div class="ps-product__image">
                         @foreach (var item in loadImage)
                         {
-                            <div class="item"><img class="zoom" src="@item" alt="@Model.Name" data-zoom-image="@item"></div>
+                            <div class="item"><img class="zoom" src="@item" alt="@product.Name" data-zoom-image="@item"></div>
                         }
                     </div>
                 </div>
+                @*<center>
+                        <div class="ps-product__thumbnail--mobile">
+
+                            <div class="ps-product__image">
+                                @foreach (var item in loadImage)
+                                {
+
+                                    <div class="item"><img class="zoom" src="@item" alt="" data-zoom-image="@item"></div>
+
+                                }
+                            </div>
+
+                            <div class="ps-product__preview">
+                                <div class="ps-product__variants">
+                                    @foreach (var item in loadImage)
+                                    {
+
+                                        <div class="item"><img src="@item" alt=""></div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </center>*@
                 <div class="ps-product__thumbnail--mobile">
 
                     <div class="ps-product__main-img ps-product__image ">
                         @foreach (var item in loadImage)
                         {
-                            <div class="item"><img class="zoom" src="@item" alt="@Model.Name" data-zoom-image="@item"></div>
+                            <div class="item"><img class="zoom" src="@item" alt="@product.Name" data-zoom-image="@item"></div>
                         }
                     </div>
 
@@ -57,38 +121,52 @@
                             @foreach (var item in loadImage)
                             {
 
-                                <div class="item"><img src="@item" alt="@Model.Name"></div>
+                                <div class="item"><img src="@item" alt="@product.Name"></div>
                             }
                         </div>
                     </div>
                 </div>
                 <div class="ps-product__info">
                     <div class="ps-product__rating">
-                        <select class="ps-rating">
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="2">5</option>
-                        </select><a href="#">(Read all 8 reviews)</a>
+                        @foreach (var tong in listReview)
+                        {
+                            tb = (float)tb + (float)tong.Rating;
+                        }
+                        @{
+                            if (listReview.Count == 0)
+                            {
+                                tb = 0;
+                            }
+                            else
+                            {
+                                tb = (int)Math.Round(tb / listReview.Count);
+
+                            }
+                        }
+                    
+                            <div id="trungbinh"></div>
+                            <a href="#">Có @listReview.Count() đánh giá</a>
+                   
+                       
+                      
                     </div>
-                    <h1>@Model.Name</h1>
+                    <h1>@product.Name</h1>
                     <p class="ps-product__category"><a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></p>
-                    @if (Model.PromotionPrice == null)
+                    @if (product.PromotionPrice == null)
                     {
-                        <h3 class="ps-product__price">  @(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")đ </h3>
+                        <h3 class="ps-product__price">  @(product.Price.HasValue ? product.Price.Value.ToString("N0") : "Liên hệ")đ </h3>
                     }
                     else
                     {
                         <h3 class="ps-product__price">
-                            <del>@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên hệ")đ</del>
-                            @Model.PromotionPrice đ
+                            <del>@(product.Price.HasValue ? product.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                            @product.PromotionPrice đ
                         </h3>
                     }
 
                     <div class="ps-product__block ps-product__quickview">
                         <h4>Mô tả</h4>
-                        <p>@Model.Description</p>
+                        <p>@product.Description</p>
                     </div>
                     @*<div class="ps-product__block ps-product__style">
                             <h4>CHOOSE YOUR STYLE</h4>
@@ -115,79 +193,105 @@
                     </div>
 
                     <div class="ps-product__shopping">
-                        <a class="ps-btn mb-10" href="/them-gio-hang?productId=@Model.ID&quantity=1">Thêm vào giỏ<i class="ps-icon-next"></i></a>
-                        <div class="ps-product__actions">
-                            <a class="mr-10" href="whishlist.html">
-                                <i class="ps-icon-heart"></i>
-                            </a><a href="compare.html">
-                                <i class="ps-icon-share"></i>
-                            </a>
-                        </div>
+                        <a class="ps-btn mb-10" href="/them-gio-hang?productId=@product.ID&quantity=1">Thêm vào giỏ<i class="ps-icon-next"></i></a>
+                        @*<div class="ps-product__actions">
+                                <a class="mr-10" href="whishlist.html">
+                                    <i class="ps-icon-heart"></i>
+                                </a><a href="compare.html">
+                                    <i class="ps-icon-share"></i>
+                                </a>
+                            </div>*@
                     </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="ps-product__content mt-50">
                     <ul class="tab-list" role="tablist">
                         <li class="active"><a href="#tab_01" aria-controls="tab_01" role="tab" data-toggle="tab">Chi tiết</a></li>
-                        <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Review</a></li>
+                        <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Bình luận</a></li>
                     </ul>
                 </div>
                 <div class="tab-content mb-60">
                     <div class="tab-pane active" role="tabpanel" id="tab_01">
-                        <p>  @Html.Raw(Model.Detail)</p>
+                        <p>  @Html.Raw(product.Detail)</p>
                     </div>
+
                     <div class="tab-pane" role="tabpanel" id="tab_02">
-                        <p class="mb-20">1 review for <strong>Shoes Air Jordan</strong></p>
-                        <div class="ps-review">
-                            <div class="ps-review__thumbnail"><img src="images/user/1.jpg" alt=""></div>
-                            <div class="ps-review__content">
-                                <header>
-                                    <select class="ps-rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <p>By<a href=""> Alena Studio</a> - November 25, 2017</p>
-                                </header>
-                                <p>Soufflé danish gummi bears tart. Pie wafer icing. Gummies jelly beans powder. Chocolate bar pudding macaroon candy canes chocolate apple pie chocolate cake. Sweet caramels sesame snaps halvah bear claw wafer. Sweet roll soufflé muffin topping muffin brownie. Tart bear claw cake tiramisu chocolate bar gummies dragée lemon drops brownie.</p>
-                            </div>
-                        </div>
-                        <form class="ps-product__review" action="_action" method="post">
-                            <h4>ADD YOUR REVIEW</h4>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                    <div class="form-group">
-                                        <label>Name:<span>*</span></label>
-                                        <input class="form-control" type="text" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email:<span>*</span></label>
-                                        <input class="form-control" type="email" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Your rating<span></span></label>
-                                        <select class="ps-rating">
-                                            <option value="1">1</option>
-                                            <option value="1">2</option>
-                                            <option value="1">3</option>
-                                            <option value="1">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
-                                    <div class="form-group">
-                                        <label>Your Review:</label>
-                                        <textarea class="form-control" rows="6"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="ps-btn ps-btn--sm">Submit<i class="ps-icon-next"></i></button>
+                        @foreach (var item in listReview)
+                        {
+
+                            @*<p class="mb-20">1 review for <strong>@item.CreatedBy</strong></p>*@
+                            <div id="row_@item.ID" class="ps-review">
+                                <div class="ps-review__thumbnail"><img src="/Assets/Client/images/user/user.png" alt="@item.CreatedBy"></div>
+                                <div class="ps-review__content">
+                                    <header>
+                                        <div class="sao@(i)"></div>
+                                        <p>By: <a href="">@item.CreatedBy</a> - @item.CreateDate</p>
+                                    </header>
+                                    <p>@item.Content</p>
+                                    <div class=" rightdiv" style="font-size:12px;font-weight:300">
+
+                                        <div>
+
+                                            @if (session != null && item.UserID == session.UserID)
+                                            {
+                                                @Ajax.ActionLink("Xóa bình luận", "Delete", new { @id = item.ID }, new AjaxOptions
+                                           {
+                                               Confirm = "Bạn có muốn xoá bình luận này?",
+                                               OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                               HttpMethod = "Delete"
+                                           })}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            i++;
+                        }
+                        @if (session == null)
+                        {
+                            <div class="ps-review">
+
+                                <div class="ps-review__content">
+                                    <header>
+
+                                        <p> Vui Lòng đăng nhập để có thể đánh giá: <a href="/dang-nhap">Đăng nhập</a>
+                                    </header>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("SendReview", "Product", FormMethod.Post))
+                            {
+
+                                <form class="ps-product__review" action="_action" method="post">
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+
+                                            <div class="form-group">
+                                                <label>Đánh giá<span></span></label>
+                                                <div id="rateYo"></div>
+                                                <input id="rating" type="hidden" name="rating" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 ">
+                                            <div class="form-group">
+                                                <label>Bình luận:</label>
+                                                @Html.TextAreaFor(x => x.Content, new { cols = 20, rows = 6, @id = "reviewbinhluan", @class = "form-control" })
+                                                @Html.HiddenFor(x => x.ProductID)
+                                            </div>
+                                            <div class="form-group">
+                                                <button id="btnComment" type="submit" class="ps-btn ps-btn--sm">
+                                                    Gửi<i class="ps-icon-next"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -222,15 +326,22 @@
                                 <a class="ps-shoe__overlay" href="@url"></a>
                             </div>
                             <div class="ps-shoe__content">
-                                <div class="ps-shoe__variants">
-
-                                    <select class="ps-rating ps-shoe__rating">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="2">5</option>
-                                    </select>
+                                <div class="ps-product__rating">
+                                    @foreach (var tong in listReview)
+                                    {
+                                        tb = (float)tb + (float)tong.Rating;
+                                    }
+                                    @{
+                                        if (listReview.Count == 0)
+                                        {
+                                            tb = 0;
+                                        }
+                                        else
+                                        {
+                                            tb = (int)Math.Round(tb / listReview.Count);
+                                        }
+                                    }
+                                    <div id="trungbinh"></div>
                                 </div>
                                 <div class="ps-shoe__detail">
                                     <a class="ps-shoe__name" href="@url">@item.Name</a>

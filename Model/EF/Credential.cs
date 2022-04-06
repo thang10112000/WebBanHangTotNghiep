@@ -7,7 +7,6 @@ namespace Model.EF
     using System.Data.Entity.Spatial;
 
     [Table("Credential")]
-    [Serializable]
     public partial class Credential
     {
         [Key]

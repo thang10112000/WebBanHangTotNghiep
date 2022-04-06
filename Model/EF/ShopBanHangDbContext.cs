@@ -25,6 +25,7 @@ namespace Model.EF
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -151,6 +152,10 @@ namespace Model.EF
                 .Property(e => e.MetaDescriptions)
                 .IsFixedLength();
 
+            modelBuilder.Entity<Review>()
+                .Property(e => e.CreatedBy)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Role>()
                 .Property(e => e.ID)
                 .IsUnicode(false);
@@ -207,7 +212,5 @@ namespace Model.EF
                 .Property(e => e.ID)
                 .IsUnicode(false);
         }
-
-        public System.Data.Entity.DbSet<Model.ViewModel.ProductViewModel> ProductViewModels { get; set; }
     }
 }

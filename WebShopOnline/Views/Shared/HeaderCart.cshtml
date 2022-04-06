@@ -1,23 +1,42 @@
 ﻿@model List<WebShopOnline.Models.CartItem>
 <a class="ps-cart__toggle" href="#"><span><i>@Model.Count</i></span><i class="ps-icon-shopping-cart"></i></a>
-<div class="ps-cart__listing">
-    <div class="ps-cart__content">
-        @foreach (var item in Model)
-        {
-            var url = "/chi-tiet/" + item.Product.MetaTitle + "-" + item.Product.ID;
-            <div class="ps-cart-item">
-                <a class="ps-cart-item__close" href="@item.Product.ID"></a>
-                <div class="ps-cart-item__thumbnail"><a href="@url"></a><img src="@item.Product.Image" alt=""></div>
-                <div class="ps-cart-item__content">
-                    <a class="ps-cart-item__title" href="@url">@item.Product.Name</a>
-                    <p><span>Số lượng:<i>@item.Quantity</i></span><span>Thành tiền:<i>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</i></span></p>
+@if (Model.Count > 0)
+{
+    <div class="ps-cart__listing">
+        <div class="ps-cart__content">
+            @foreach (var item in Model)
+            {
+                var url = "/chi-tiet/" + item.Product.MetaTitle + "-" + item.Product.ID;
+                <div class="ps-cart-item">
+                    <a class="ps-cart-item__close" href="@item.Product.ID"></a>
+                    <div class="ps-cart-item__thumbnail"><a href="@url"></a><img src="@item.Product.Image" alt=""></div>
+                    <div class="ps-cart-item__content">
+                        <a class="ps-cart-item__title" href="@url">@item.Product.Name</a>
+                        <p><span>Số lượng:<i>@item.Quantity</i></span><span>Thành tiền:<i>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</i></span></p>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+        <div class="ps-cart__total">
+            <p>Tổng:<span> @Model.Sum(i => (i.Quantity))</span></p>
+            <p>
+                Tổng tiền:<span>
+                    @Model.Sum(i => ((i.Product.Price.GetValueOrDefault(0) * i.Quantity)))
+                </span>
+            </p>
+        </div>
+        <div class="ps-cart__footer"><a class="ps-btn" href="/gio-hang">Đến giỏ hàng<i class="ps-icon-arrow-left"></i></a></div>
     </div>
-    <div class="ps-cart__total">
-        <p>Number of items:<span>36</span></p>
-        <p>Item Total:<span>£528.00</span></p>
+}
+else
+{
+    <div class="ps-cart__listing">
+        <div class="ps-cart__total">
+            <p>
+                <span>
+             Chưa có sản phẩm nào trong giỏ!
+                </span>
+            </p>
+        </div>
     </div>
-    <div class="ps-cart__footer"><a class="ps-btn" href="/gio-hang">Đến giỏ hàng<i class="ps-icon-arrow-left"></i></a></div>
-</div>
+}

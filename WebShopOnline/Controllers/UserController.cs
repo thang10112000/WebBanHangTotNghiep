@@ -1,4 +1,5 @@
-﻿using BotDetect.Web.Mvc;
+﻿using ASPSnippets.GoogleAPI;
+using BotDetect.Web.Mvc;
 using Facebook;
 using Model.DAO;
 using Model.EF;
@@ -8,8 +9,10 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Xml.Linq;
 using WebShopOnline.Common;
+using WebShopOnline.LoginGoogle;
 using WebShopOnline.Models;
 
 namespace WebShopOnline.Controllers
@@ -179,6 +182,53 @@ namespace WebShopOnline.Controllers
         public ActionResult Logout()
         {
             Session[CommonConstants.USER_SESSION] = null;
+            return Redirect("/");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void LoginWithGooglePlus()
+        {
+            GoogleConnect.ClientId = "620272693439-7f93ghgcitmvime28r27nkg3iqn3e430.apps.googleusercontent.com";
+            GoogleConnect.ClientSecret = "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";
+            GoogleConnect.RedirectUri = Request.Url.AbsoluteUri.Split('?')[0];
+            GoogleConnect.Authorize("profile", "email");
+        }
+
+        [ActionName("LoginWithGooglePlus")]
+        public ActionResult LoginWithGooglePlusConfirmed()
+        {
+            if (!string.IsNullOrEmpty(Request.QueryString["code"]))
+            {
+                string code = Request.QueryString["code"];
+                string json = GoogleConnect.Fetch("me", code);
+                GoogleProfile profile = new JavaScriptSerializer().Deserialize<GoogleProfile>(json);
+
+                User khachHang = new User()
+                {
+                    UserName = profile.Id,
+                    Name = profile.Name,
+                    Email = profile.email,
+                    CreateDate = DateTime.Now,
+                    CreateBy = profile.Name,
+                    Status = true,
+                    GroupID = "MEMBER"
+                };
+                var resultInsert = new UserDao().InsertForGoogle(khachHang);
+                if (resultInsert > 0)
+                {
+                    var nguoidung = new UserDao().GetById(khachHang.UserName);
+                    var userSession = new UserLogin();
+                    userSession.UserName = nguoidung.UserName;
+                    userSession.UserID = nguoidung.ID;
+                    userSession.GroupID = nguoidung.GroupID;
+                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                }
+            }
+            if (Request.QueryString["error"] == "access_denied")
+            {
+                return Content("access_denied");
+            }
             return Redirect("/");
         }
     }

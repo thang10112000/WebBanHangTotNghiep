@@ -9,7 +9,6 @@ namespace Model.EF
     [Table("UserGroup")]
     public partial class UserGroup
     {
-        [Key]
         [StringLength(20)]
         public string ID { get; set; }
 

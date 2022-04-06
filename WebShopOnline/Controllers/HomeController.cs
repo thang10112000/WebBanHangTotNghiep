@@ -22,7 +22,7 @@ namespace WebShopOnline.Controllers
             ViewBag.NewProducts = productDao.ListNewProduct(4);// hiển thị sản phẩm mới tối đa 4
             ViewBag.NewContents = new ContentDao().ListNewContent(3); // hiển thị tin tức mới tối đa 3
             ViewBag.ListFeatureProducts = productDao.ListFeatureProduct(4); // hiển thị sản phẩm có lượt viewcout nhiều tối đa 4
-
+            //ViewBag.Review = new ReviewDao().ListAll(id);
             //set seo title
             ViewBag.Title = ConfigurationManager.AppSettings["HomeTitle"];
             ViewBag.Keywords = ConfigurationManager.AppSettings["HomeKeyword"];

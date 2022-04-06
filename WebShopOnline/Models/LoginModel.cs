@@ -16,5 +16,7 @@ namespace WebShopOnline.Models
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [Display(Name = "Mật khẩu")]
         public string Password { set; get; }
+
+        public bool RememberMe { set; get; }
     }
 }

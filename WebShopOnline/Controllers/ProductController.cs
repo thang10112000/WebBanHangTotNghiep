@@ -1,10 +1,12 @@
 ﻿using Model.DAO;
+using Model.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using WebShopOnline.Common;
 
 namespace WebShopOnline.Controllers
 {
@@ -116,7 +118,7 @@ namespace WebShopOnline.Controllers
         public ActionResult Detail(long id)
         {
             var product = new ProductDao().ViewDetail(id);
-
+            //var listReview = new ReviewDao().ListAll(id);
             var images = product.MoreImages;
             XElement xImages = XElement.Parse(images);
             List<string> listImagesReturn = new List<string>();
@@ -129,7 +131,39 @@ namespace WebShopOnline.Controllers
             ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID.Value);
             ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id); // xem sản phẩm liên quan
             ViewBag.loadImage = listImagesReturn;
-            return View(product);
+            ViewBag.Review = new ReviewDao().ListAll(id);
+            ViewBag.Product = product;
+            var review = new Review()
+            {
+                ProductID = product.ID
+            };
+            return View(review);
+        }
+
+        public ActionResult SendReview(Review review, float rating)
+        {
+            var dao = new ReviewDao();
+            var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+            review.CreateDate = DateTime.Now;
+            review.UserID = session.UserID;
+            review.CreatedBy = session.UserName;
+            review.Status = true;
+            review.Rating = rating;
+            var result = dao.Insert(review);
+            if (result > 0)
+            {
+                return RedirectToAction("Detail", "Product", new { id = review.ProductID });
+            }
+
+            return View(review);
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            new ReviewDao().Delete(id);
+
+            return RedirectToAction("Detail", "Product");
         }
     }
 }

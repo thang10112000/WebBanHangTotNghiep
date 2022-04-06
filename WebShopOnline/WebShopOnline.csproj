@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ASPSnippets.GoogleAPI">
+      <HintPath>..\..\..\Downloads\Google_Login\Bin\ASPSnippets.GoogleAPI.dll</HintPath>
+    </Reference>
     <Reference Include="BotDetect, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
       <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.dll</HintPath>
     </Reference>
@@ -77,6 +80,12 @@
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -190,6 +199,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LoginGoogle\GoogleProfile.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -3061,6 +3071,7 @@
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\images\404.jpg" />
     <Content Include="Assets\Client\images\access\1.jpg" />
     <Content Include="Assets\Client\images\access\2.jpg" />
     <Content Include="Assets\Client\images\access\3.jpg" />
@@ -3102,6 +3113,7 @@
     <Content Include="Assets\Client\images\cart-preview\1.jpg" />
     <Content Include="Assets\Client\images\cart-preview\2.jpg" />
     <Content Include="Assets\Client\images\cart-preview\3.jpg" />
+    <Content Include="Assets\Client\images\ceo.jpg" />
     <Content Include="Assets\Client\images\clothes\1.jpg" />
     <Content Include="Assets\Client\images\clothes\10.jpg" />
     <Content Include="Assets\Client\images\clothes\11.jpg" />
@@ -3118,6 +3130,7 @@
     <Content Include="Assets\Client\images\flag\japan.svg" />
     <Content Include="Assets\Client\images\flag\singapore.svg" />
     <Content Include="Assets\Client\images\flag\usa.svg" />
+    <Content Include="Assets\Client\images\Home.css" />
     <Content Include="Assets\Client\images\hot-deal.png" />
     <Content Include="Assets\Client\images\imgtest\404.png" />
     <Content Include="Assets\Client\images\imgtest\5fa32b21cc9cc1b25e5b002a340f962a.jpeg" />
@@ -3129,9 +3142,13 @@
     <Content Include="Assets\Client\images\imgtest\quan2.png" />
     <Content Include="Assets\Client\images\imgtest\team.png" />
     <Content Include="Assets\Client\images\imgtest\teamwork.jpg" />
+    <Content Include="Assets\Client\images\info.jpg" />
+    <Content Include="Assets\Client\images\info2.jpg" />
+    <Content Include="Assets\Client\images\info3.jpg" />
     <Content Include="Assets\Client\images\logo-white.png" />
     <Content Include="Assets\Client\images\logo-white\logo.png" />
     <Content Include="Assets\Client\images\logo.png" />
+    <Content Include="Assets\Client\images\man.png" />
     <Content Include="Assets\Client\images\marker.png" />
     <Content Include="Assets\Client\images\offer\banner-1.jpg" />
     <Content Include="Assets\Client\images\offer\clothes-1.jpg" />
@@ -3194,6 +3211,9 @@
     <Content Include="Assets\Client\images\slider\2.jpg" />
     <Content Include="Assets\Client\images\slider\3.jpg" />
     <Content Include="Assets\Client\images\slider\slider.png" />
+    <Content Include="Assets\Client\images\team.png" />
+    <Content Include="Assets\Client\images\teamwork.jpg" />
+    <Content Include="Assets\Client\images\teamwork2.png" />
     <Content Include="Assets\Client\images\team\1.png" />
     <Content Include="Assets\Client\images\team\2.png" />
     <Content Include="Assets\Client\images\team\3.png" />
@@ -3208,12 +3228,17 @@
     <Content Include="Assets\Client\images\user\3.jpg" />
     <Content Include="Assets\Client\images\user\4.jpg" />
     <Content Include="Assets\Client\images\user\5.jpg" />
+    <Content Include="Assets\Client\images\user\user.png" />
     <Content Include="Assets\Client\js\controller\baseController.js" />
     <Content Include="Assets\Client\js\controller\cartController.js" />
     <Content Include="Assets\Client\js\controller\contactController.js" />
     <Content Include="Assets\Client\js\jquery-ui.css" />
     <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\main.js" />
+    <Content Include="Assets\Client\js\review\jquery.rateyo.js" />
+    <Content Include="Assets\Client\js\review\jquery.rateyo.min.css" />
+    <Content Include="Assets\Client\js\review\jquery.rateyo.min.js" />
+    <Content Include="Assets\Client\js\review\review.js" />
     <Content Include="Assets\Client\js\shoe-variants.js" />
     <Content Include="Assets\Client\plugins\animate.css\animate.min.css" />
     <Content Include="Assets\Client\plugins\bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.min.css" />
