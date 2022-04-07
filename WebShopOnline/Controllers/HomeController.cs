@@ -1,4 +1,6 @@
-﻿using Model.DAO;
+﻿using Common;
+using Model.DAO;
+using Model.EF;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -49,7 +51,7 @@ namespace WebShopOnline.Controllers
         [ChildActionOnly]
         public PartialViewResult HeaderCart()
         {
-            var cart = Session[CommonConstants.CartSession];
+            var cart = Session[Common.CommonConstants.CartSession];
             var list = new List<CartItem>();
             if (cart != null)
             {
@@ -57,6 +59,33 @@ namespace WebShopOnline.Controllers
             }
 
             return PartialView(list);
+        }
+
+        [HttpPost]
+        public ActionResult RegisterEmail(string email)
+        {
+            var registerEmail = new Register();
+            registerEmail.Information = email;
+            registerEmail.CreatedDate = DateTime.Now;
+            string a = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/template/newRegister.html"));
+            a = a.Replace("{{Email}}", email);
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+            new MailHelper().SendMail(email, "Đăng ký thành viên nhận thông tin sản phẩm mới", a);
+            new MailHelper().SendMail(toEmail, "Đăng ký nhận thông tin sản phẩm ", a);
+            var id = new RegisterProductDao().InsertFeedBack(registerEmail);
+            if (id > 0)
+            {
+                return Json(new
+                {
+                    status = true
+                });
+                //send mail
+            }
+            else
+                return Json(new
+                {
+                    status = false
+                });
         }
     }
 }

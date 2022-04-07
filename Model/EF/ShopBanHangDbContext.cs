@@ -105,9 +105,9 @@ namespace Model.EF
                 .Property(e => e.ShipMobile)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Order>()
-                .Property(e => e.Price)
-                .HasPrecision(18, 0);
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Size)
+                .IsFixedLength();
 
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.Price)

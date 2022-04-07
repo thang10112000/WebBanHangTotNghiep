@@ -124,7 +124,7 @@ namespace WebShopOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult Payment(string shipName, string mobile, string address, string email, string content)
+        public ActionResult Payment(string shipName, string mobile, string address, string email, string content, string productname)
         {
             var order = new Order();
 
@@ -134,15 +134,15 @@ namespace WebShopOnline.Controllers
             order.ShipName = shipName;
             order.ShipEmail = email;
             order.Content = content;
-            //order.Product = products;
-            //order.Quality = quality;
-
+            order.Product = productname;
             try
             {
                 var id = new OrderDao().Insert(order);
                 var cart = (List<CartItem>)Session[CartSession];
                 var detailDao = new Model.DAO.OrderDetailDao();
                 decimal total = 0;
+                var productName = "";
+                var quanlity = 0;
                 foreach (var item in cart)
                 {
                     var orderDetail = new OrderDetail();
@@ -150,21 +150,25 @@ namespace WebShopOnline.Controllers
                     orderDetail.OrderID = id;
                     orderDetail.Price = item.Product.Price;
                     orderDetail.Quantity = item.Quantity;
+                    orderDetail.Name = item.Product.Name;
 
                     detailDao.Insert(orderDetail);
 
+                    productName = item.Product.Name;
+                    quanlity += (item.Quantity);
                     total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
                 string contents = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/neworder.html"));
 
                 contents = contents.Replace("{{CustomerName}}", shipName);
-                // contents = contents.Replace("{{Products}}", products);
-                //contents = contents.Replace("{{Quality}}", quality);
+                contents = contents.Replace("{{Products}}", productName);
+                contents = contents.Replace("{{Quanlity}}", quanlity.ToString("NO"));
                 contents = contents.Replace("{{Phone}}", mobile);
                 contents = contents.Replace("{{Email}}", email);
                 contents = contents.Replace("{{Address}}", address);
                 contents = contents.Replace("{{Total}}", total.ToString("N0"));
                 contents = contents.Replace("{{Content}}", content);
+
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                 new MailHelper().SendMail(email, "Đơn hàng mới từ Shop", contents);

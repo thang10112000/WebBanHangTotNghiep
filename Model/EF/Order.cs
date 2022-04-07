@@ -37,12 +37,5 @@ namespace Model.EF
         public string Content { get; set; }
 
         public int? Status { get; set; }
-
-        [StringLength(250)]
-        public string ProductName { get; set; }
-
-        public int? Quality { get; set; }
-
-        public decimal? Price { get; set; }
     }
 }

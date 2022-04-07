@@ -100,9 +100,10 @@
                         <h3><i class="fa fa-envelope"></i>Đăng ký để nhận thông tin sản phẩm</h3>
                     </div>
                     <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                        <form class="ps-subscribe__form" action="do_action" method="post">
-                            <input class="form-control" type="text" placeholder="">
-                            <button>Đăng ký ngay</button>
+
+                        <form class="ps-subscribe__form">
+                            <input id="txtEmail" class="form-control" type="email" placeholder="Nhập email đăng ký">
+                            <button id="btnSend">Đăng ký ngay</button>
                         </form>
                     </div>
                     @*<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
@@ -232,6 +233,9 @@
     <!-- js tự nhúng-->
     <!-- Custom scripts-->
     <script type="text/javascript" src="/Assets/Client/js/main.js"></script>
+
+    <script src="/Assets/Client/js/controller/registerController.js"></script>
+
     @RenderSection("jsFooter", required: false)
 </body>
 </html>

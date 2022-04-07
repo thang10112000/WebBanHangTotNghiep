@@ -3232,6 +3232,7 @@
     <Content Include="Assets\Client\js\controller\baseController.js" />
     <Content Include="Assets\Client\js\controller\cartController.js" />
     <Content Include="Assets\Client\js\controller\contactController.js" />
+    <Content Include="Assets\Client\js\controller\registerController.js" />
     <Content Include="Assets\Client\js\jquery-ui.css" />
     <Content Include="Assets\Client\js\jquery-ui.js" />
     <Content Include="Assets\Client\js\main.js" />
@@ -3411,6 +3412,7 @@
     <Content Include="Assets\Client\resources\js\custom.js" />
     <Content Include="Assets\Client\template\newContact.html" />
     <Content Include="Assets\Client\template\neworder.html" />
+    <Content Include="Assets\Client\template\newRegister.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -3997,6 +3999,7 @@
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\Detail.cshtml" />
     <Content Include="Views\Content\Tag.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
