@@ -27,9 +27,10 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            var url = "/chi-tiet/" + item.Product.MetaTitle + "-" + item.Product.ID;
                             <tr>
                                 <td>
-                                    <a class="ps-product__preview" href="product-detail.html">
+                                    <a class="ps-product__preview" href="@url">
                                         <img class="mr-15 sizeimg1" src="@item.Product.Image" alt="@item.Product.Name">@item.Product.Name
                                     </a>
                                 </td>
@@ -62,9 +63,9 @@
                 <div class="ps-cart__promotion">
                     <div class="form-group">
                         @*<div class="ps-form--icon">
-                            <i class="fa fa-angle-right"></i>
-                            <input class="form-control" type="text" placeholder="Promo Code">
-                        </div>*@
+                                <i class="fa fa-angle-right"></i>
+                                <input class="form-control" type="text" placeholder="Promo Code">
+                            </div>*@
                     </div>
                     <div class="form-group">
                         <button id="btnContinue" class="ps-btn ps-btn--gray">Tiếp tục mua sắm</button>

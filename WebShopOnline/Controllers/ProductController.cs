@@ -15,22 +15,34 @@ namespace WebShopOnline.Controllers
         // GET: Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            var model = new ProductDao().ListAllPaging(searchString, page, pageSize);
-            int totalRecord = 0;
+            var dao = new ProductDao();
+            var model = dao.ListAllPaging(searchString, page, pageSize);
+            ViewBag.SearchString = searchString;
 
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
+            return View(model);
+        }
 
-            int maxPage = 5;
-            int totalPage = 0;
+        public ActionResult ListLowHight(int page = 1, int pageSize = 10)
+        {
+            var dao = new ProductDao();
+            var model = dao.ListLowHight(page, pageSize);
 
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
+            return View(model);
+        }
+
+        public ActionResult ListHightLow(int page = 1, int pageSize = 10)
+        {
+            var dao = new ProductDao();
+            var model = dao.ListHightLow(page, pageSize);
+
+            return View(model);
+        }
+
+        public ActionResult Hot(int page = 1, int pageSize = 10)
+        {
+            var dao = new ProductDao();
+            var model = dao.Hot(page, pageSize);
+
             return View(model);
         }
 
@@ -60,7 +72,7 @@ namespace WebShopOnline.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Category(long cateId, int page = 1, int pageSize = 1)
+        public ActionResult Category(long cateId, int page = 1, int pageSize = 10)
         {
             var category = new ProductCategoryDao().ViewDetail(cateId);
             ViewBag.Category = category;
@@ -84,7 +96,7 @@ namespace WebShopOnline.Controllers
             return View(model);
         }
 
-        public ActionResult Search(string keyword, int page = 1, int pageSize = 1)
+        public ActionResult Search(string keyword, int page = 1, int pageSize = 10)
         {
             int totalRecord = 0;
             var model = new ProductDao().Search(keyword, ref totalRecord, page, pageSize);
@@ -105,15 +117,6 @@ namespace WebShopOnline.Controllers
 
             return View(model);
         }
-
-        //[OutputCache(CacheProfile = "Cache1DayForProduct")]
-        //public ActionResult Detail(long id)
-        //{
-        //    var product = new ProductDao().ViewDetail(id);
-        //    ViewBag.Category = new ProductCategoryDao().ViewDetail(product.CategoryID.Value);
-        //    ViewBag.RelatedProducts = new ProductDao().ListRelatedProducts(id);
-        //    return View(product);
-        //}
 
         public ActionResult Detail(long id)
         {

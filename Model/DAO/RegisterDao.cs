@@ -8,28 +8,21 @@ using System.Threading.Tasks;
 
 namespace Model.DAO
 {
-    public class OrderDao
+    public class RegisterDao
     {
         private ShopBanHangDbContext db = null;
 
-        public OrderDao()
+        public RegisterDao()
         {
             db = new ShopBanHangDbContext();
         }
 
-        public long Insert(Order order)
+        public IEnumerable<Register> ListAllPaging(string searchString, int page, int pageSize)
         {
-            db.Orders.Add(order);
-            db.SaveChanges();
-            return order.ID;
-        }
-
-        public IEnumerable<Order> ListAllPaging(string searchString, int page, int pageSize)
-        {
-            IQueryable<Order> model = db.Orders;
+            IQueryable<Register> model = db.Registers;
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.ShipName.Contains(searchString));
+                model = model.Where(x => x.Information.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
@@ -38,8 +31,8 @@ namespace Model.DAO
         {
             try
             {
-                var order = db.Orders.Find(id);
-                db.Orders.Remove(order);
+                var register = db.Registers.Find(id);
+                db.Registers.Remove(register);
                 db.SaveChanges();
                 return true;
             }

@@ -1,6 +1,7 @@
 ﻿using Common;
 using Model.DAO;
 using Model.EF;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using WebShopOnline.Models;
+using WebShopOnline.OrderMomo;
 
 namespace WebShopOnline.Controllers
 {
@@ -138,6 +140,7 @@ namespace WebShopOnline.Controllers
             try
             {
                 var id = new OrderDao().Insert(order);
+
                 var cart = (List<CartItem>)Session[CartSession];
                 var detailDao = new Model.DAO.OrderDetailDao();
                 decimal total = 0;
@@ -146,9 +149,10 @@ namespace WebShopOnline.Controllers
                 foreach (var item in cart)
                 {
                     var orderDetail = new OrderDetail();
+                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity); // nè đoạn này tính tổng tiền
                     orderDetail.ProductID = item.Product.ID;
                     orderDetail.OrderID = id;
-                    orderDetail.Price = item.Product.Price;
+                    orderDetail.Price = total;
                     orderDetail.Quantity = item.Quantity;
                     orderDetail.Name = item.Product.Name;
 
@@ -156,7 +160,6 @@ namespace WebShopOnline.Controllers
 
                     productName = item.Product.Name;
                     quanlity += (item.Quantity);
-                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
                 string contents = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/neworder.html"));
 
@@ -182,7 +185,86 @@ namespace WebShopOnline.Controllers
             return Redirect("/hoan-thanh");
         }
 
+        //[HttpGet]
+        //public ActionResult PaymentMomo()
+        //{
+        //    var cart = Session[CartSession];
+        //    var list = new List<CartItem>();
+        //    if (cart != null)
+        //    {
+        //        list = (List<CartItem>)cart;
+        //    }
+        //    return View(list);
+        //}
+
+        //[HttpPost]
+        public ActionResult PaymentMomo()
+        {
+            var cart = (List<CartItem>)Session[CartSession];
+            decimal total = 0;
+            foreach (var item in cart)
+            {
+                total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity); // nè đoạn này tính tổng tiền
+            }
+            //request params need to request to MoMo system
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOQPV620220414";
+            string accessKey = "P6c6TUXasoaoXDpt";
+            string serectkey = "9zvvqk80KjI843mDdroa4py9A8MvDoXA";
+            string orderInfo = "Đơn mới";
+            string returnUrl = "https://localhost:44302/Cart/Success";
+            string notifyurl = "http://ba1adf48beba.ngrok.io/Cart/Payment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
+
+            string amount = total.ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            //Before sign HMAC SHA256 signature
+            string rawHash = "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            //sign signature SHA256
+            string signature = crypto.signSHA256(rawHash, serectkey);
+
+            //build body json request
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+            };
+
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
         public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult ErrorSuccess()
         {
             return View();
         }

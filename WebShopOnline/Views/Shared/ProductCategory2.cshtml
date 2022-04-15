@@ -1,0 +1,26 @@
+﻿@model List<Model.EF.ProductCategory>
+<div class="ps-widget__header">
+    <h3>Danh mục sản phẩm</h3>
+</div>
+<div class="ps-widget__content">
+    <ul class="ps-list--checked">
+        <li><a href="/san-pham">Tất cả sản phẩm</a></li>
+        @foreach (var item in Model.Where(x => x.ParentID == null))
+
+        {
+            var child = Model.Where(x => x.ParentID == item.ID);
+            var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
+            <li>
+                <a href="/san-pham/@item.MetaTitle-@item.ID" title="@item.Name" @parentClass>@item.Name</a>
+                @if (child.Count() > 0)
+                {
+                    <ul class="dropdown-menu">
+                        @foreach (var childItem in child)
+                        {
+                            <li><a href="/san-pham/@childItem.MetaTitle-@childItem.ID">@childItem.Name</a></li>
+                        }
+                    </ul>}
+            </li>
+        }
+    </ul>
+</div>

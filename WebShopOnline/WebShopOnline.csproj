@@ -178,8 +178,10 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlideController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -203,6 +205,8 @@
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="OrderMomo\MoMoSecurity.cs" />
+    <Compile Include="OrderMomo\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3145,6 +3149,7 @@
     <Content Include="Assets\Client\images\info.jpg" />
     <Content Include="Assets\Client\images\info2.jpg" />
     <Content Include="Assets\Client\images\info3.jpg" />
+    <Content Include="Assets\Client\images\logo-momo.png" />
     <Content Include="Assets\Client\images\logo-white.png" />
     <Content Include="Assets\Client\images\logo-white\logo.png" />
     <Content Include="Assets\Client\images\logo.png" />
@@ -3960,6 +3965,8 @@
     <Content Include="Areas\Admin\Views\Shared\_401.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Register\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3999,7 +4006,12 @@
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Content\Detail.cshtml" />
     <Content Include="Views\Content\Tag.cshtml" />
-    <Content Include="Views\Home\Success.cshtml" />
+    <Content Include="Views\Shared\ProductCategory2.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ListLowHight.cshtml" />
+    <Content Include="Views\Product\ListHightLow.cshtml" />
+    <Content Include="Views\Product\Hot.cshtml" />
+    <Content Include="Views\Cart\ErrorSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

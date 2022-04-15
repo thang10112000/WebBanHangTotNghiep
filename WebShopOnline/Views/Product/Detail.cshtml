@@ -16,6 +16,10 @@
     var i = 1;
     var a = 1;
     float tb = 0;
+
+    float tb1 = 0;
+    var a1 = 1;
+    var i1 = 1;
 }
 
 @section jsFooter{
@@ -53,6 +57,38 @@
                 });
             });
     </script>
+
+    @foreach (var item in relatedProducts)
+    {
+        var review1 = new Model.DAO.ReviewDao().ListAll(item.ID);
+        foreach (var tong1 in review1)
+        {
+            tb1 = (float)tb1 + (float)tong1.Rating;
+        }
+        if (review1.Count == 0)
+        {
+            tb1 = 0;
+        }
+        else
+        {
+            tb1 = (float)Math.Round((tb1 / review1.Count) * 2, MidpointRounding.AwayFromZero) / 2;
+        }
+        <script>
+            $(function () {
+                $('.trungbinha@(a1)').rateYo({
+                    rating: @tb1,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a1++;
+        tb1 = 0;
+    }
 }
 <div class="test">
     <div class="container">
@@ -128,6 +164,7 @@
                 </div>
                 <div class="ps-product__info">
                     <div class="ps-product__rating">
+
                         @foreach (var tong in listReview)
                         {
                             tb = (float)tb + (float)tong.Rating;
@@ -139,16 +176,13 @@
                             }
                             else
                             {
-                                tb = (int)Math.Round(tb / listReview.Count);
+                                tb = (float)Math.Round((tb / listReview.Count) * 2, MidpointRounding.AwayFromZero) / 2;
 
                             }
                         }
-                    
-                            <div id="trungbinh"></div>
-                            <a href="#">Có @listReview.Count() đánh giá</a>
-                   
-                       
-                      
+
+                        <div id="trungbinh"></div>
+                        <a href="#">Có @listReview.Count() đánh giá</a>
                     </div>
                     <h1>@product.Name</h1>
                     <p class="ps-product__category"><a href="/san-pham/@category.MetaTitle-@category.ID">@category.Name</a></p>
@@ -168,17 +202,9 @@
                         <h4>Mô tả</h4>
                         <p>@product.Description</p>
                     </div>
-                    @*<div class="ps-product__block ps-product__style">
-                            <h4>CHOOSE YOUR STYLE</h4>
-                            <ul>
-                                <li><a href="product-detail.html"><img src="images/shoe/sidebar/1.jpg" alt=""></a></li>
-                                <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>
-                                <li><a href="product-detail.html"><img src="images/shoe/sidebar/3.jpg" alt=""></a></li>
-                                <li><a href="product-detail.html"><img src="images/shoe/sidebar/2.jpg" alt=""></a></li>
-                            </ul>
-                        </div>*@
-                    <div class="ps-product__block ps-product__size">
-                        <h4>Size<a href="#">Tham khảo size</a></h4>
+                 
+                    @*<div class="ps-product__block ps-product__size">
+                        <h4>Size<a href="/tin-tuc/huong-dan-dat-hang-3">Tham khảo size</a></h4>
                         <select class="ps-select selectpicker">
                             <option value="1">Size</option>
                             <option value="2">S</option>
@@ -190,7 +216,7 @@
                         <div class="form-group">
                             <input class="form-control " type="number" value="0">
                         </div>
-                    </div>
+                    </div>*@
 
                     <div class="ps-product__shopping">
                         <a class="ps-btn mb-10" href="/them-gio-hang?productId=@product.ID&quantity=1">Thêm vào giỏ<i class="ps-icon-next"></i></a>
@@ -319,29 +345,16 @@
                     <div class="ps-shoes--carousel">
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
-                                <div class="ps-badge"><span>Hot</span></div><a class="ps-shoe__favorite" href="#">
+                                <div class="ps-badge"><span>Hot</span></div><a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1">
                                     <i class="ps-icon-heart"></i>
                                 </a>
                                 <img src="@item.Image" alt="@item.Name">
                                 <a class="ps-shoe__overlay" href="@url"></a>
                             </div>
                             <div class="ps-shoe__content">
-                                <div class="ps-product__rating">
-                                    @foreach (var tong in listReview)
-                                    {
-                                        tb = (float)tb + (float)tong.Rating;
-                                    }
-                                    @{
-                                        if (listReview.Count == 0)
-                                        {
-                                            tb = 0;
-                                        }
-                                        else
-                                        {
-                                            tb = (int)Math.Round(tb / listReview.Count);
-                                        }
-                                    }
-                                    <div id="trungbinh"></div>
+                                <div class="ps-shoe__variants">
+
+                                    <span class="trungbinha@(i1)"></span>
                                 </div>
                                 <div class="ps-shoe__detail">
                                     <a class="ps-shoe__name" href="@url">@item.Name</a>
@@ -365,6 +378,7 @@
                             </div>
                         </div>
                     </div>
+                    i1++;
                 }
             </div>
     </div>

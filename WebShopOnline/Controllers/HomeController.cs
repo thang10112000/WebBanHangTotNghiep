@@ -36,8 +36,8 @@ namespace WebShopOnline.Controllers
         [OutputCache(Duration = 3600 * 24)]
         public ActionResult MainMenu()
         {
-            var model = new MenuDao().ListByGroupId(1);
-
+            var model = new ProductCategoryDao().ListAll();
+            ViewBag.NewContents = new ContentDao().ListNewContent(3);
             return PartialView(model);
         }
 

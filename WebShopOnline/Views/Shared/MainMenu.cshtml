@@ -1,37 +1,54 @@
-﻿@model List<Model.EF.Menu>
+﻿@model List<Model.EF.ProductCategory>
+@{
 
+    var listContents = (List<Model.EF.Content>)ViewBag.NewContents;
+}
 <ul class="main-menu menu">
-
-    @foreach (var item in Model.Where(x => x.ParentID == null))
-    {
-        var child = Model.Where(x => x.ParentID == item.ID);
-        var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
-        <li class="menu-item menu-item-has-children has-mega-menu">
-            <a href="@item.Link" @parentClass target="@item.Target">@item.Text</a>
-            @if (child.Count() > 0)
+    <li class="menu-item menu-item-has-children dropdown">
+        <a href="/san-pham">Sản phẩm</a>
+        <ul class="sub-menu">
+            @foreach (var item in Model.Where(x => x.ParentID == null))
             {
-                <div class="mega-menu">
+                var child = Model.Where(x => x.ParentID == item.ID);
+                var parentClass = child.Count() > 0 ? "class=dropdown-toggle data-toggle=dropdown" : "";
+                <li class="menu-item menu-item-has-children dropdown">
+                    <a href="/san-pham/@item.MetaTitle-@item.ID" title="@item.Name" @parentClass>@item.Name</a>
+                    @if (child.Count() > 0)
+                    {
+                        <ul class="sub-menu">
+                            @foreach (var childItem in child)
+                            {
+                                <li class="menu-item"><a href="/san-pham/@childItem.MetaTitle-@childItem.ID">@childItem.Name</a></li>
 
-                    <div class="mega-wrap">
+                            }
+                        </ul>
+                    }
+                </li>
 
-                        <div class="mega-column">
-                            <h4 class="mega-heading">Shoes</h4>
-                            <ul class="mega-item">
-                                @foreach (var childItem in child)
-                                {
-                                    <li><a href="/san-pham/@childItem.Link-@childItem.ID">@childItem.Text</a></li>
-
-                                }
-                            </ul>
-                        </div>
-
-
-                    </div>
-
-                </div>
             }
-        </li>
-    }
+        </ul>
+    </li>
+    <li class="menu-item menu-item-has-children dropdown">
+        <a href="/gioi-thieu">Giới thiệu</a>
+        <ul class="sub-menu">
+            <li class="menu-item"><a href="/gioi-thieu">Về chúng tôi</a></li>
+        </ul>
+    </li>
+    <li class="menu-item menu-item-has-children dropdown">
+        <a href="/tin-tuc">Tin tức</a>
+        <ul class="sub-menu">
+            @foreach (var item in listContents)
+            {
+                var link = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                <li class="menu-item"><a href="@link">@item.Name</a></li>
+            }
+        </ul>
+    </li>
+    <li class="menu-item menu-item-has-children dropdown">
+        <a href="/lien-he">Liên hệ</a>
+        <ul class="sub-menu">
 
+            <li class="menu-item"><a href="/lien-he">Phản hồi về shop</a></li>
+        </ul>
+    </li>
 </ul>
-

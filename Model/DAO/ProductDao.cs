@@ -23,6 +23,11 @@ namespace Model.DAO
             return db.Products.OrderByDescending(x => x.CreateDate).Take(top).ToList();
         }
 
+        public List<Product> ListLowToHighProduct()
+        {
+            return db.Products.OrderByDescending(x => x.Price).ToList();
+        }
+
         //public Review ViewReview(long id)
         //{
         //    return db.Reviews.Find(id);
@@ -49,6 +54,41 @@ namespace Model.DAO
                 model = model.Where(x => x.Name.Contains(searchString) || x.Name.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreateDate).ToPagedList(page, pageSize);
+        }
+
+        public IEnumerable<Product> ListLowHight(int page, int pageSize)
+        {
+            var result = db.Products.OrderBy(x => x.PromotionPrice).ToList();
+            var result1 = db.Products.OrderBy(x => x.Price).ToList();
+            if (result == null)
+            {
+                return result.ToPagedList(page, pageSize);
+            }
+            else
+            {
+                return result1.ToPagedList(page, pageSize);
+            }
+        }
+
+        public IEnumerable<Product> ListHightLow(int page, int pageSize)
+        {
+            var result = db.Products.OrderByDescending(x => x.PromotionPrice).ToList();
+            var result1 = db.Products.OrderByDescending(x => x.Price).ToList();
+            if (result == null)
+            {
+                return result.ToPagedList(page, pageSize);
+            }
+            else
+            {
+                return result1.ToPagedList(page, pageSize);
+            }
+        }
+
+        public IEnumerable<Product> Hot(int page, int pageSize)
+        {
+            var result = db.Products.OrderByDescending(x => x.ViewCount).ToList();
+
+            return result.ToPagedList(page, pageSize);
         }
 
         /// <summary>

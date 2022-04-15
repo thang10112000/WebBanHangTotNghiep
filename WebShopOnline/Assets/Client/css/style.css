@@ -8986,3 +8986,45 @@ html .bg--parallax {
     image-rendering: pixelated;
     object-fit: cover;
 }
+
+.dropdown1 {
+    width: 30rem;
+    position: relative;
+}
+
+    .dropdown1:hover .dropdown1-list {
+        opacity: 1;
+        visibility: visible;
+    }
+
+/*.dropdown1-select {
+    padding: 1.5rem;
+    border-radius: 4px;
+    background-color: gray;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.dropdown1-list {
+    border-radius: 4px;
+    background-color: gray;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s linear, visibility 0.2s linear;
+}
+
+dropdown1-list_item {
+    padding: 1rem;
+    font-size: 1.4rem;
+}*/
+.abc {
+    background-color: black;
+}

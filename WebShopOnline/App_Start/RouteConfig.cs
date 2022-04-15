@@ -57,6 +57,12 @@ namespace WebShopOnline
           defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },
           namespaces: new[] { "WebShopOnline.Controllers" }
       );
+            routes.MapRoute(
+          name: "ErrorSuccess",
+          url: "loi-thanh-toan",
+          defaults: new { controller = "Cart", action = "ErrorSuccess", id = UrlParameter.Optional },
+          namespaces: new[] { "WebShopOnline.Controllers" }
+      );
 
             routes.MapRoute(
        name: "News",
@@ -83,6 +89,24 @@ namespace WebShopOnline
        defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional },
        namespaces: new[] { "WebShopOnline.Controllers" }
    );
+            routes.MapRoute(
+      name: "ListLowHight",
+      url: "thap-den-cao",
+      defaults: new { controller = "Product", action = "ListLowHight", id = UrlParameter.Optional },
+      namespaces: new[] { "WebShopOnline.Controllers" }
+  );
+            routes.MapRoute(
+    name: "ListHightLow",
+    url: "cao-den-thap",
+    defaults: new { controller = "Product", action = "ListHightLow", id = UrlParameter.Optional },
+    namespaces: new[] { "WebShopOnline.Controllers" }
+);
+            routes.MapRoute(
+ name: "Hot",
+ url: "noi-bat",
+ defaults: new { controller = "Product", action = "Hot", id = UrlParameter.Optional },
+ namespaces: new[] { "WebShopOnline.Controllers" }
+);
             routes.MapRoute(
         name: "Register",
         url: "dang-ky",
