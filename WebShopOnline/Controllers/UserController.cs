@@ -3,10 +3,14 @@ using BotDetect.Web.Mvc;
 using Facebook;
 using Model.DAO;
 using Model.EF;
+using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -79,6 +83,116 @@ namespace WebShopOnline.Controllers
                 }
             }
             return View(model);
+        }
+
+        public ActionResult Infomation()
+        {
+            if (Session[CommonConstants.USER_SESSION] == null)
+            {
+                return View("Index");
+            }
+            return View();
+        }
+
+        public ActionResult ChangePassword(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePassword request, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                var checkpw = dao.ViewDetail(id);
+                if (!string.IsNullOrEmpty(request.Password) && !string.IsNullOrEmpty(request.NewPassword) && !string.IsNullOrEmpty(request.ConfirmPassword))
+                {
+                    var encryptedMd5Pas = Encryptor.MD5Hash(request.Password);
+                    var encryptedMd5Pass = Encryptor.MD5Hash(request.NewPassword);
+                    var encryptedMd5Passold = Encryptor.MD5Hash(request.ConfirmPassword);
+                    request.Password = encryptedMd5Pas;
+                    request.NewPassword = encryptedMd5Pass;
+                    request.ConfirmPassword = encryptedMd5Passold;
+                }
+                if (checkpw.Password == request.Password)
+                {
+                    var result = dao.UpdatePassword(request);
+                    if (result)
+                    {
+                        return RedirectToAction("Logout1", "User");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Có lỗi xảy ra vui lòng thử lại. ");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Password Cũ không đúng");
+                }
+            }
+            return View(request);
+        }
+
+        public ActionResult NewChangePassword(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewChangePassword(NewChangePassword request, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                var checkpw = dao.ViewDetail(id);
+                if (!string.IsNullOrEmpty(request.NewPassword) && !string.IsNullOrEmpty(request.ConfirmPassword))
+                {
+                    var encryptedMd5Pass = Encryptor.MD5Hash(request.NewPassword);
+                    var encryptedMd5Passold = Encryptor.MD5Hash(request.ConfirmPassword);
+                    request.NewPassword = encryptedMd5Pass;
+                    request.ConfirmPassword = encryptedMd5Passold;
+                }
+
+                var result = dao.ForgotPassword(request);
+                if (result)
+                {
+                    return RedirectToAction("Logout1", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Có lỗi trong quá trình đổi mật khẩu vui lòng thử lại.");
+                }
+            }
+
+            return View(request);
+        }
+
+        public ActionResult ChangeProflle(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeProflle(ChangeProflle request, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                var result = dao.UpdateProfile(request);
+
+                if (result)
+                {
+                    return RedirectToAction("Infomation", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật không thành công");
+                }
+            }
+
+            return View(request);
         }
 
         public ActionResult LoginFacebook()
@@ -156,6 +270,12 @@ namespace WebShopOnline.Controllers
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
+                    userSession.Password = user.Password;
+                    userSession.Name = user.Name;
+                    userSession.Phone = user.Phone;
+                    userSession.Email = user.Email;
+                    userSession.Address = user.Address;
+                    userSession.GroupID = user.GroupID;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     return Redirect("/");
                 }
@@ -183,6 +303,12 @@ namespace WebShopOnline.Controllers
         {
             Session[CommonConstants.USER_SESSION] = null;
             return Redirect("/");
+        }
+
+        public ActionResult Logout1()
+        {
+            Session[CommonConstants.USER_SESSION] = null;
+            return Redirect("/User/Login");
         }
 
         [HttpPost]
@@ -230,6 +356,63 @@ namespace WebShopOnline.Controllers
                 return Content("access_denied");
             }
             return Redirect("/");
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [CaptchaValidation("CaptchaCode", "forgotpassword", "Mã xác nhận không đúng!")]
+        public ActionResult ForgotPassword(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                var forgot = new UserDao().ViewEmail(email);
+                if (forgot == null)
+                {
+                    ViewBag.Message = "Lỗi Email Không Tồn Tại";
+                }
+                else
+                {
+                    string a = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/template/newForgotPassword.html"));
+                    a = a.Replace("{{CustomerName}}", email);
+                    a = a.Replace("{{link}}", "https://localhost:44302/User/NewChangePassword/" + forgot.ID);
+                    SendMail(email, "Email Quên Mật Khẩu Mới", a);
+                    return RedirectToAction("SuccessEmail");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult SuccessEmail()
+        {
+            return View();
+        }
+
+        public void SendMail(string toEmailAddress, string subject, string content)
+        {
+            var fromEmailAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+            var fromEmailDisplayName = ConfigurationManager.AppSettings["FromEmailDisplayName"].ToString();
+            var fromEmailPassword = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
+            var smtpHost = ConfigurationManager.AppSettings["SMTPHost"].ToString();
+            var smtpPort = ConfigurationManager.AppSettings["SMTPPort"].ToString();
+
+            bool enabledSsl = bool.Parse(ConfigurationManager.AppSettings["EnabledSSL"].ToString());
+
+            string body = content;
+            MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(toEmailAddress));
+            message.Subject = subject;
+            message.IsBodyHtml = true;
+            message.Body = body;
+
+            var client = new SmtpClient();
+            client.Credentials = new NetworkCredential(fromEmailAddress, fromEmailPassword);
+            client.Host = smtpHost;
+            client.EnableSsl = enabledSsl;
+            client.Port = !string.IsNullOrEmpty(smtpPort) ? Convert.ToInt32(smtpPort) : 0;
+            client.Send(message);
         }
     }
 }

@@ -3,3 +3,4 @@ C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Common\bin\Debug\Common.pd
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Common\obj\Debug\Common.dll
 C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Common\obj\Debug\Common.pdb
+C:\Users\ADMIN\Dropbox\PC\Desktop\WebBanHangTotNghiep\Common\obj\Debug\Common.csproj.AssemblyReference.cache

@@ -11022,15 +11022,19 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url(https://i.pinimg.com/564x/5d/1b/9a/5d1b9ab7364230761c11a7873f5f79d4.jpg);
-    background-position:unset;
-    background-size:cover;
+    background: url(https://i.pinimg.com/564x/c5/42/81/c54281c98269ab31a4c95f50024a58ba.jpg);
+    background-position: unset;
+    background-size: cover;
     object-fit: cover;
-   
 }
-
+.bg-login-image1 {
+    background: url(https://i.pinimg.com/564x/e7/24/c0/e724c06ffe61a965fea9a8f7d7b84ed6.jpg);
+    background-position: unset;
+    background-size: cover;
+    object-fit: cover;
+}
 .bg-register-image {
-    background: url(https://i.pinimg.com/564x/5d/1b/9a/5d1b9ab7364230761c11a7873f5f79d4.jpg);
+    background: url(https://i.pinimg.com/564x/84/d5/fd/84d5fd85f390ac164723ff26c761880e.jpg);
     background-position: center;
     background-size: cover
 }

@@ -217,5 +217,11 @@ namespace Model.EF
                 .Property(e => e.ID)
                 .IsUnicode(false);
         }
+
+        public System.Data.Entity.DbSet<Model.ViewModel.ChangePassword> ChangePasswords { get; set; }
+
+        public System.Data.Entity.DbSet<Model.ViewModel.ChangeProflle> ChangeProflles { get; set; }
+
+        public System.Data.Entity.DbSet<Model.ViewModel.NewChangePassword> NewChangePasswords { get; set; }
     }
 }

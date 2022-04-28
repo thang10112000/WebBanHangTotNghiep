@@ -1,5 +1,5 @@
 ﻿@model List<WebShopOnline.Models.CartItem>
-<a class="ps-cart__toggle" href="#"><span><i>@Model.Count</i></span><i class="ps-icon-shopping-cart"></i></a>
+<a class="ps-cart__toggle" href="/gio-hang"><span><i>@Model.Count</i></span><i class="ps-icon-shopping-cart"></i></a>
 @if (Model.Count > 0)
 {
     <div class="ps-cart__listing">
@@ -8,7 +8,7 @@
             {
                 var url = "/chi-tiet/" + item.Product.MetaTitle + "-" + item.Product.ID;
                 <div class="ps-cart-item">
-                    <a class="ps-cart-item__close" href="@item.Product.ID"></a>
+                    <a class="ps-cart-item__close" data-id="@item.Product.ID"></a>
                     <div class="ps-cart-item__thumbnail"><a href="@url"></a><img src="@item.Product.Image" alt=""></div>
                     <div class="ps-cart-item__content">
                         <a class="ps-cart-item__title" href="@url">@item.Product.Name</a>
@@ -30,13 +30,5 @@
 }
 else
 {
-    <div class="ps-cart__listing">
-        <div class="ps-cart__total">
-            <p>
-                <span>
-             Chưa có sản phẩm nào trong giỏ!
-                </span>
-            </p>
-        </div>
-    </div>
+
 }

@@ -28,6 +28,18 @@ namespace WebShopOnline
         namespaces: new[] { "WebShopOnline.Controllers" }
     );
             routes.MapRoute(
+            name: "About",
+            url: "gioi-thieu",
+            defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
+            namespaces: new[] { "WebShopOnline.Controllers" }
+        );
+            routes.MapRoute(
+                name: "ForgotPassword",
+                url: "quen-mat-khau",
+                defaults: new { controller = "User", action = "ForgotPassword", id = UrlParameter.Optional },
+                namespaces: new[] { "WebShopOnline.Controllers" }
+            );
+            routes.MapRoute(
               name: "Product Detail",
               url: "chi-tiet/{metatitle}-{id}",
               defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional },
@@ -45,12 +57,7 @@ namespace WebShopOnline
              defaults: new { controller = "Content", action = "Detail", id = UrlParameter.Optional },
              namespaces: new[] { "WebShopOnline.Controllers" }
          );
-            routes.MapRoute(
-             name: "About",
-             url: "gioi-thieu",
-             defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional },
-             namespaces: new[] { "WebShopOnline.Controllers" }
-         );
+
             routes.MapRoute(
           name: "Contact",
           url: "lien-he",
@@ -78,11 +85,17 @@ namespace WebShopOnline
       );
 
             routes.MapRoute(
-       name: "Login",
-       url: "dang-nhap",
-       defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+       name: "Infomation",
+       url: "thong-tin-tai-khoan",
+       defaults: new { controller = "User", action = "Infomation", id = UrlParameter.Optional },
        namespaces: new[] { "WebShopOnline.Controllers" }
    );
+            routes.MapRoute(
+     name: "Login",
+     url: "dang-nhap",
+     defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+     namespaces: new[] { "WebShopOnline.Controllers" }
+ );
             routes.MapRoute(
        name: "Search",
        url: "tim-kiem",

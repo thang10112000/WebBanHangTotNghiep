@@ -202,21 +202,21 @@
                         <h4>Mô tả</h4>
                         <p>@product.Description</p>
                     </div>
-                 
-                    @*<div class="ps-product__block ps-product__size">
-                        <h4>Size<a href="/tin-tuc/huong-dan-dat-hang-3">Tham khảo size</a></h4>
-                        <select class="ps-select selectpicker">
-                            <option value="1">Size</option>
-                            <option value="2">S</option>
-                            <option value="3">M</option>
-                            <option value="3">L</option>
-                            <option value="3">XL</option>
-                        </select>
 
-                        <div class="form-group">
-                            <input class="form-control " type="number" value="0">
-                        </div>
-                    </div>*@
+                    @*<div class="ps-product__block ps-product__size">
+                            <h4>Size<a href="/tin-tuc/huong-dan-dat-hang-3">Tham khảo size</a></h4>
+                            <select class="ps-select selectpicker">
+                                <option value="1">Size</option>
+                                <option value="2">S</option>
+                                <option value="3">M</option>
+                                <option value="3">L</option>
+                                <option value="3">XL</option>
+                            </select>
+
+                            <div class="form-group">
+                                <input class="form-control " type="number" value="0">
+                            </div>
+                        </div>*@
 
                     <div class="ps-product__shopping">
                         <a class="ps-btn mb-10" href="/them-gio-hang?productId=@product.ID&quantity=1">Thêm vào giỏ<i class="ps-icon-next"></i></a>
@@ -346,7 +346,7 @@
                         <div class="ps-shoe">
                             <div class="ps-shoe__thumbnail">
                                 <div class="ps-badge"><span>Hot</span></div><a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1">
-                                    <i class="ps-icon-heart"></i>
+                                    <i class="ps-icon-shopping-cart"></i>
                                 </a>
                                 <img src="@item.Image" alt="@item.Name">
                                 <a class="ps-shoe__overlay" href="@url"></a>

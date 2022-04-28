@@ -55,7 +55,7 @@
                 <select class="ps-select selectpicker" onchange="window.location.href=this.value;">
 
                     <option value="/Product/Index">Sắp xếp  theo</option>
-                    <option value="/noi-bat">Bán chạy</option>
+                    <option value="/noi-bat">Đáng chú ý</option>
                     <option value="/thap-den-cao">Giá (Thấp ➞ Cao )</option>
                     <option value="/cao-den-thap">Giá (Cao ➞ Thấp)</option>
                 </select>
@@ -68,7 +68,7 @@
                 <div class="ps-product__column">
                     <div class="ps-shoe mb-30">
                         <div class="ps-shoe__thumbnail">
-                            <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1"><i class="ps-icon-heart"></i></a>
+                            <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1"><i class="ps-icon-shopping-cart"></i></a>
                             <img class="sizeimg" src="@item.Image" alt="@item.Name"><a class="ps-shoe__overlay" href="@link"></a>
                         </div>
                         <div class="ps-shoe__content">

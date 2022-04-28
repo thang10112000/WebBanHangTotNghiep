@@ -33,6 +33,7 @@ namespace WebShopOnline.Models
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Vui lòng nhập email")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail không hợp lệ")]
         public string Email { set; get; }
 
         [Display(Name = "Số điện thoại")]

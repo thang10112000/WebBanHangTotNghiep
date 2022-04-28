@@ -1,5 +1,6 @@
 ﻿using Common;
 using Model.EF;
+using Model.ViewModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,11 @@ namespace Model.DAO
             }
         }
 
+        public User ViewEmail(string email)
+        {
+            return db.Users.Where(x => x.Email == email).SingleOrDefault();
+        }
+
         public long InsertForFacebook(User entity)
         {
             var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
@@ -69,6 +75,73 @@ namespace Model.DAO
                 user.Email = entity.Email;
                 user.Phone = entity.Phone;
                 user.ModifiedBy = entity.ModifiedBy;
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                //logging
+                return false;
+            }
+        }
+
+        public bool UpdatePassword(ChangePassword entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.Id);
+                var detail = db.Users.Where(log => log.Password == entity.Password
+        && log.UserName == entity.UserName).FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(entity.NewPassword) && !string.IsNullOrEmpty(entity.ConfirmPassword))
+                {
+                    user.Password = entity.NewPassword;
+                }
+
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                //logging
+                return false;
+            }
+        }
+
+        public bool ForgotPassword(NewChangePassword entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.Id);
+                if (!string.IsNullOrEmpty(entity.NewPassword) && !string.IsNullOrEmpty(entity.ConfirmPassword))
+                {
+                    user.Password = entity.NewPassword;
+                }
+
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                //logging
+                return false;
+            }
+        }
+
+        public bool UpdateProfile(ChangeProflle entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.ID);
+
+                user.Name = entity.Name;
+
+                user.Address = entity.Address;
+                user.Email = entity.Email;
+                user.Phone = entity.Phone;
                 user.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
@@ -200,9 +273,9 @@ namespace Model.DAO
             return db.Users.Count(x => x.Email == email) > 0;
         }
 
-        //public bool CheckLogin(long userid)
-        //{
-        //    return db.Users.Count(x => x.ID == userid ) > 0;
-        //}
+        public bool CheckPassword(string passWord)
+        {
+            return db.Users.Count(x => x.Password == passWord) > 0;
+        }
     }
 }

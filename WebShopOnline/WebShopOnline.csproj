@@ -195,6 +195,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -3074,6 +3075,7 @@
     <Content Include="Assets\Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Assets\Client\css\profile.css" />
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\images\404.jpg" />
     <Content Include="Assets\Client\images\access\1.jpg" />
@@ -3149,6 +3151,16 @@
     <Content Include="Assets\Client\images\info.jpg" />
     <Content Include="Assets\Client\images\info2.jpg" />
     <Content Include="Assets\Client\images\info3.jpg" />
+    <Content Include="Assets\Client\images\information\404.jpg" />
+    <Content Include="Assets\Client\images\information\ceo.jpg" />
+    <Content Include="Assets\Client\images\information\Home.css" />
+    <Content Include="Assets\Client\images\information\info.jpg" />
+    <Content Include="Assets\Client\images\information\info2.jpg" />
+    <Content Include="Assets\Client\images\information\info3.jpg" />
+    <Content Include="Assets\Client\images\information\man.png" />
+    <Content Include="Assets\Client\images\information\team.png" />
+    <Content Include="Assets\Client\images\information\teamwork.jpg" />
+    <Content Include="Assets\Client\images\information\teamwork2.png" />
     <Content Include="Assets\Client\images\logo-momo.png" />
     <Content Include="Assets\Client\images\logo-white.png" />
     <Content Include="Assets\Client\images\logo-white\logo.png" />
@@ -3233,7 +3245,10 @@
     <Content Include="Assets\Client\images\user\3.jpg" />
     <Content Include="Assets\Client\images\user\4.jpg" />
     <Content Include="Assets\Client\images\user\5.jpg" />
+    <Content Include="Assets\Client\images\user\loginanh.jpg" />
+    <Content Include="Assets\Client\images\user\register.jpg" />
     <Content Include="Assets\Client\images\user\user.png" />
+    <Content Include="Assets\Client\js\controller\badword.js" />
     <Content Include="Assets\Client\js\controller\baseController.js" />
     <Content Include="Assets\Client\js\controller\cartController.js" />
     <Content Include="Assets\Client\js\controller\contactController.js" />
@@ -3416,6 +3431,7 @@
     <Content Include="Assets\Client\resources\css\elements\_pagination.css" />
     <Content Include="Assets\Client\resources\js\custom.js" />
     <Content Include="Assets\Client\template\newContact.html" />
+    <Content Include="Assets\Client\template\newForgotPassword.html" />
     <Content Include="Assets\Client\template\neworder.html" />
     <Content Include="Assets\Client\template\newRegister.html" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -4012,13 +4028,21 @@
     <Content Include="Views\Product\ListHightLow.cshtml" />
     <Content Include="Views\Product\Hot.cshtml" />
     <Content Include="Views\Cart\ErrorSuccess.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\User\Infomation.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\ChangeProflle.cshtml" />
+    <Content Include="Views\User\SuccessEmail.cshtml" />
+    <Content Include="Views\User\NewChangePassword.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\About\" />
+    <Folder Include="UserPassword\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
