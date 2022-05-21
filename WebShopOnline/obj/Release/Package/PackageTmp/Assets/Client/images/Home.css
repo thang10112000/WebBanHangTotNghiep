@@ -1,0 +1,98 @@
+.createform {
+    width: 900px;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 15px 15px 18px 5px rgba(0, 0, 0, 70%);
+    -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px;
+}
+@media screen and (max-width: 1200px) {
+    .createform {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .createform {
+        max-width: 1200px;
+    }
+}
+.signup-form {
+    width: auto;
+}
+.signup-form{
+    width: 50%;
+    overflow: hidden;
+}
+.signup-form {
+    margin-left: 75px;
+    margin-right: 75px;
+    padding-left: 34px;
+}
+.signup-form {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    /* box-sizing: border-box; */
+    padding: 0 30px;
+}
+@media screen and (max-width: 768px) {
+    .signup-content, .signin-content {
+        flex-direction: column;
+        -moz-flex-direction: column;
+        -webkit-flex-direction: column;
+        -o-flex-direction: column;
+        -ms-flex-direction: column;
+        justify-content: center;
+        -moz-justify-content: center;
+        -webkit-justify-content: center;
+        -o-justify-content: center;
+        -ms-justify-content: center;
+    }
+
+    .signup-form {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        /* box-sizing: border-box; */
+        padding: 0 30px;
+    }
+
+   
+
+    .signup-form {
+        width: auto;
+    }
+
+   
+    
+}
+display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+    display: flex;
+    display: -webkit-flex;
+}
+.signup-content {
+    padding: 75px 0;
+}
+.sizeanh {
+    max-width: 100%;
+    max-height: 45rem;
+    height: auto;
+    image-rendering: pixelated;
+    object-fit: cover;
+}
+.sizeanh2 {
+    max-width: 100%;
+    max-height: 35rem;
+    height: auto;
+    image-rendering: pixelated;
+    object-fit: cover;
+}

@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Model.EF.Review>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Đánh giá";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Quản lý đánh giá và bình luận </h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách</h6>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Index", "Review", FormMethod.Get))
+            {
+                <div class="row form-group">
+
+                    <div class="col-md-4">
+                        <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" placeholder="Nhập thông tin bạn muốn kiếm..." />
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Đăng bởi</th>
+                            <th>Bình luận</th>
+                            <th>Đánh giá</th>
+                            <th>ID sản phẩm</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID">
+
+                                <td>@item.ID</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@item.Content</td>
+                                <td>@item.Rating</td>
+                                <td>@item.ProductID</td>
+
+                                <td>
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                               {
+                                        Confirm = "Bạn có muốn xoá bản ghi này?",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                   HttpMethod = "Delete"
+                               }, new { @class = "btn btn-danger btn-icon-split" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="container">
+                    <div class="pagination" style="margin-left: 400px">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

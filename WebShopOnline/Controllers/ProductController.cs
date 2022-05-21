@@ -143,7 +143,7 @@ namespace WebShopOnline.Controllers
             return View(review);
         }
 
-        public ActionResult SendReview(Review review, float rating)
+        public ActionResult SendReview(Review review, float? rating)
         {
             var dao = new ReviewDao();
             var session = (UserLogin)Session[CommonConstants.USER_SESSION];
@@ -160,6 +160,24 @@ namespace WebShopOnline.Controllers
 
             return View(review);
         }
+
+        /*public ActionResult SendAnswer(Review review)
+        {
+            var dao = new ReviewDao();
+            var session = (UserLogin)Session[CommonConstants.USER_SESSION];
+            review.CreateDate = DateTime.Now;
+            review.UserID = session.UserID;
+            review.CreatedBy = session.UserName;
+            review.Status = true;
+
+            var result = dao.Insert(review);
+            if (result > 0)
+            {
+                return RedirectToAction("Detail", "Product", new { id = review.ProductID });
+            }
+
+            return View(review);
+        }*/
 
         [HttpDelete]
         public ActionResult Delete(int id)

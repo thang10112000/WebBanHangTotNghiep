@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+    var slides = (List<Model.EF.Slide>)ViewBag.Slides;
+    var listNewProducts = (List<Model.EF.Product>)ViewBag.NewProducts;
+    var listFeatureProducts = (List<Model.EF.Product>)ViewBag.ListFeatureProducts;
+    var listContents = (List<Model.EF.Content>)ViewBag.NewContents;
+
+    float tb = 0;
+    var a = 1;
+    var i = 1;
+    float tb1 = 0;
+    var a1 = 1;
+    var i1 = 1;
+
+}
+@section jsFooter{
+    <link href="/Assets/Client/js/review/jquery.rateyo.min.css" rel="stylesheet" />
+    <script src="/Assets/Client/js/review/review.js"></script>
+    <script src="/Assets/Client/js/review/jquery.rateyo.min.js"></script>
+    @foreach (var item in listNewProducts)
+    {
+        var review = new Model.DAO.ReviewDao().ListAll(item.ID);
+        foreach (var tong in review)
+        {
+            tb = (float)tb + (float)tong.Rating;
+        }
+        if (review.Count == 0)
+        {
+            tb = 0;
+        }
+        else
+        {
+            tb = (float)Math.Round((tb / review.Count) * 2, MidpointRounding.AwayFromZero) / 2;
+        }
+        <script>
+            $(function () {
+                $('.trungbinh@(a)').rateYo({
+                    rating: @tb,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a++;
+        tb = 0;
+    }
+    @foreach (var item in listFeatureProducts)
+    {
+        var review1 = new Model.DAO.ReviewDao().ListAll(item.ID);
+        foreach (var tong1 in review1)
+        {
+            tb1 = (float)tb1 + (float)tong1.Rating;
+        }
+        if (review1.Count == 0)
+        {
+            tb1 = 0;
+        }
+        else
+        {
+            tb1 = (float)Math.Round((tb1 / review1.Count) * 2, MidpointRounding.AwayFromZero) / 2;
+        }
+        <script>
+            $(function () {
+                $('.trungbinha@(a1)').rateYo({
+                    rating: @tb1,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a1++;
+        tb1 = 0;
+    }
+}
+@section  slide{
+    <div class="ps-banner">
+        <div class="rev_slider fullscreenbanner" id="home-banner">
+            <ul>
+                @foreach (var item in slides)
+                {
+                    <li class="ps-banner ps-banner--white" data-index="rs-100" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0">
+                        <img class="rev-slidebg" src="@item.Image" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina>
+                        <div class="tp-caption ps-banner__header" id="layer20" data-x="left" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-150','-120','-150','-170']" data-width="['none','none','none','400']" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:1000,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
+                            <p>@item.Name</p>
+                        </div>
+                        <div class="tp-caption ps-banner__title" id="layer339" data-x="['left','left','left','left']" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-60','-40','-50','-70']" data-type="text" data-responsive_offset="on" data-textAlign="['center','center','center','center']" data-frames="[{&quot;delay&quot;:1200,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
+                            <p class="text-uppercase">@item.Description</p>
+                        </div>
+                        <div class="tp-caption ps-banner__description" id="layer2-14" data-x="['left','left','left','left']" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['30','50','50','50']" data-type="text" data-responsive_offset="on" data-textAlign="['center','center','center','center']" data-frames="[{&quot;delay&quot;:1200,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
+                            <p>@item.Detail</p>
+                        </div><a class="tp-caption ps-btn" id="layer364" href="@item.Link" data-x="['left','left','left','left']" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['120','140','200','200']" data-type="text" data-responsive_offset="on" data-textAlign="['center','center','center','center']" data-frames="[{&quot;delay&quot;:1500,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">Purchase Now<i class="ps-icon-next"></i></a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+<div class="ps-section--features-product  ps-section pt-100 pb-100">
+    <div class="ps-container">
+        <div class="ps-section__header mb-50">
+
+            @{ Html.RenderAction("ProductCategory", "Product");}
+        </div>
+        <div class="ps-section__content pb-50">
+            <div class="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
+                <div class="ps-masonry">
+                    <div class="grid-sizer"></div>
+                    @foreach (var item in listNewProducts)
+                    {
+                        var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="grid-item kids">
+                            <div class="grid-item__content-wrapper">
+                                <div class="ps-shoe mb-30">
+                                    <div class="ps-shoe__thumbnail">
+                                        <div class="ps-badge"><span>New</span></div>
+
+                                        <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1">
+                                            <i class="ps-icon-shopping-cart"></i>
+                                        </a>
+                                        <img class="#" src="@item.Image" alt="@item.Name">
+                                        <a class="ps-shoe__overlay" href="@url"></a>
+                                    </div>
+                                    <div class="ps-shoe__content">
+                                        <div class="ps-shoe__variants">
+
+                                            <span class="trungbinh@(i)"></span>
+                                        </div>
+                                        <div class="ps-shoe__detail">
+                                            <a class="ps-shoe__name" href="@url">@item.Name</a>
+                                            <p class="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p>
+                                            @if (item.PromotionPrice != null)
+                                            {
+                                                <span class="ps-shoe__price">
+                                                    <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                                    @item.PromotionPrice đ
+                                                </span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="ps-shoe__price">
+
+                                                    @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ps-section--offer">
+    <div class="ps-column sizeanh2"><a class="ps-offer" href="/"><img src="/Assets/Client/images/teamwork.jpg" alt=""></a></div>
+    <div class="ps-column sizeanh2"><a class="ps-offer" href="/"><img src="/Assets/Client/images/teamwork2.png" alt=""></a></div>
+</div>
+
+<div class="ps-section ps-section--top-sales ps-owl-root pt-80 pb-80">
+    <div class="ps-container">
+        <div class="ps-section__header mb-50">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+                    <h3 class="ps-section__title" data-mask="Hot Today">-Đáng chú ý</h3>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                    <div class="ps-owl-actions"><a class="ps-prev" href="#"><i class="ps-icon-arrow-right"></i>Trước</a><a class="ps-next" href="#">Sau<i class="ps-icon-arrow-left"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="ps-section__content">
+            <div class="ps-owl--colection owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-duration="1000" data-owl-mousedrag="on">
+                @foreach (var item in listFeatureProducts)
+                {
+                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                    <div class="ps-shoes--carousel">
+                        <div class="ps-shoe">
+                            <div class="ps-shoe__thumbnail">
+
+                                <div class="ps-badge ps-badge--sale "><span>Hot</span></div>
+                                <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1">
+                                    <i class="ps-icon-shopping-cart"></i>
+                                </a><img class="#" src="@item.Image" alt="@item.Name">
+                                <a class="ps-shoe__overlay" href="@url"></a>
+                            </div>
+                            <div class="ps-shoe__content">
+                                <div class="ps-shoe__variants">
+
+                                    <span class="trungbinha@(i1)"></span>
+                                </div>
+                                <div class="ps-shoe__detail">
+                                    <a class="ps-shoe__name" href="@url">@item.Name</a>
+                                    <p class="ps-shoe__categories">
+                                        <a href="#">Men shoes</a>,
+                                        <a href="#"> Nike</a>,<a href="#"> Jordan</a>
+                                    </p>
+                                    @if (item.PromotionPrice != null)
+                                    {
+                                        <span class="ps-shoe__price">
+                                            <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                            @item.PromotionPrice đ
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span class="ps-shoe__price">
+
+                                            @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    i1++;
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ps-home-testimonial bg--parallax pb-80" data-background="/Assets/Client/images/teamwork.jpg">
+    <div class="container">
+        <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
+            <div class="ps-testimonial">
+                <div class="ps-testimonial__thumbnail"><img src="/Assets/Client/images/ceo.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+                <header>
+                    <p>Lý Thượng Thắng - CEO & Nhà sáng lập</p>
+                </header>
+                <footer>
+                    <p>“Sự hài lòng của các bạn là thành công của chúng tôi. “</p>
+                </footer>
+            </div>
+
+            <div class="ps-testimonial">
+                <div class="ps-testimonial__thumbnail"><img src="/Assets/Client/images/ceo.jpg" alt=""><i class="fa fa-quote-left"></i></div>
+                <header>
+                    <p>Lý Thượng Thắng - CEO & Nhà sáng lập</p>
+                </header>
+                <footer>
+                    <p>“Sự hài lòng của các bạn là thành công của chúng tôi. “</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ps-section ps-home-blog pt-80 pb-80">
+    <div class="ps-container">
+        <div class="ps-section__header mb-50">
+            <h2 class="ps-section__title" data-mask="News">- Tin tức</h2>
+            <div class="ps-section__action"><a class="ps-morelink text-uppercase" href="/tin-tuc">Xem tất cả<i class="fa fa-long-arrow-right"></i></a></div>
+        </div>
+        <div class="ps-section__content">
+            <div class="row">
+                @foreach (var item in listContents)
+                {
+                    var link = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                        <div class="ps-post">
+                            <div class="ps-post__thumbnail"><a class="ps-post__overlay" href="@link"></a><img class="sizeimg4" src="@item.Image" alt="@item.Name"></div>
+                            <div class="ps-post__content">
+                                <a class="ps-post__title" href="@link">@item.Name</a>
+                                <p class="ps-post__meta"><span>By:<a class="mr-5" href="#">@item.CreatedBy</a></span> -<span class="ml-5">@item.CreatedDate</span></p>
+                                <p>@item.Description</p><a class="ps-morelink" href="@link">Xem chi tiết<i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

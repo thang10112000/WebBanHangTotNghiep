@@ -1,0 +1,109 @@
+﻿@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Sản phẩm nổi bật";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+    float tb1 = 0;
+    var a1 = 1;
+    var i1 = 1;
+}
+@section jsFooter{
+    <link href="/Assets/Client/js/review/jquery.rateyo.min.css" rel="stylesheet" />
+    <script src="/Assets/Client/js/review/review.js"></script>
+    <script src="/Assets/Client/js/review/jquery.rateyo.min.js"></script>
+
+    @foreach (var item in Model)
+    {
+        var review1 = new Model.DAO.ReviewDao().ListAll(item.ID);
+        foreach (var tong1 in review1)
+        {
+            tb1 = (float)tb1 + (float)tong1.Rating;
+        }
+        if (review1.Count == 0)
+        {
+            tb1 = 0;
+        }
+        else
+        {
+            tb1 = (float)Math.Round((tb1 / review1.Count) * 2, MidpointRounding.AwayFromZero) / 2;
+        }
+        <script>
+            $(function () {
+                $('.trungbinha@(a1)').rateYo({
+                    rating: @tb1,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a1++;
+        tb1 = 0;
+    }
+}
+<div class="ps-products-wrap pt-80 pb-80">
+    <div class="ps-products" data-mh="product-listing">
+        <div class="ps-product-action">
+            <div class="ps-product__filter">
+                <select class="ps-select selectpicker" onchange="window.location.href=this.value;">
+                    <option>Sắp xếp  theo</option>
+                    <option value="/noi-bat">Đáng chú ý</option>
+                    <option value="/thap-den-cao">Giá (Thấp ➞ Cao )</option>
+                    <option value="/cao-den-thap">Giá (Cao ➞ Thấp)</option>
+                </select>
+            </div>
+        </div>
+        <div class="ps-product__columns">
+            @foreach (var item in Model)
+            {
+                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="ps-product__column">
+                    <div class="ps-shoe mb-30">
+                        <div class="ps-shoe__thumbnail">
+                            <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1"><i class="ps-icon-shopping-cart"></i></a>
+                            <img class="sizeimg" src="@item.Image" alt="@item.Name"><a class="ps-shoe__overlay" href="@link"></a>
+                        </div>
+                        <div class="ps-shoe__content">
+                            <div class="ps-shoe__variants">
+
+                                <span class="trungbinha@(i1)"></span>
+                            </div>
+                            <div class="ps-shoe__detail">
+                                <a class="ps-shoe__name" href="@link">@item.Name</a>
+                                <p class="ps-shoe__categories"><a href="@link"> Xem sản phẩm</a></p>
+                                @if (item.PromotionPrice != null)
+                                {
+                                    <span class="ps-shoe__price">
+                                        <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                        @item.PromotionPrice đ
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="ps-shoe__price">
+                                        @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                i1++;
+            }
+        </div>
+        <div class="ps-pagination">
+            <ul class="pagination">
+
+                <li>  @Html.PagedListPager(Model, page => Url.Action("ListLowHight"))</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ps-sidebar" data-mh="product-listing">
+        <aside class="ps-widget--sidebar ps-widget--category">
+            @{ Html.RenderAction("ProductCategory2", "Product");}
+        </aside>
+    </div>
+</div>

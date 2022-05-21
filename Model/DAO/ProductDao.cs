@@ -205,7 +205,7 @@ namespace Model.DAO
                 product.Price = entity.Price;
                 product.CategoryID = entity.CategoryID;
                 product.Detail = entity.Detail;
-
+                product.PromotionPrice = entity.PromotionPrice;
                 product.Status = entity.Status;
                 product.ModifiedBy = entity.ModifiedBy;
                 product.ModifiedDate = DateTime.Now;

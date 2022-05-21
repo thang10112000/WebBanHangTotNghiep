@@ -1,0 +1,159 @@
+﻿@model List<Model.EF.Product>
+@{
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
+    ViewBag.Title = category.Name;
+    ViewBag.Keywords = category.MetaKeywords;
+    ViewBag.Descriptions = category.MetaDescriptions;
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+    float tb1 = 0;
+    var a1 = 1;
+    var i1 = 1;
+}
+@section jsFooter{
+    <link href="/Assets/Client/js/review/jquery.rateyo.min.css" rel="stylesheet" />
+    <script src="/Assets/Client/js/review/review.js"></script>
+    <script src="/Assets/Client/js/review/jquery.rateyo.min.js"></script>
+
+    @foreach (var item in Model)
+    {
+        var review1 = new Model.DAO.ReviewDao().ListAll(item.ID);
+        foreach (var tong1 in review1)
+        {
+            tb1 = (float)tb1 + (float)tong1.Rating;
+        }
+        if (review1.Count == 0)
+        {
+            tb1 = 0;
+        }
+        else
+        {
+            tb1 = (float)Math.Round((tb1 / review1.Count) * 2, MidpointRounding.AwayFromZero) / 2;
+        }
+        <script>
+            $(function () {
+                $('.trungbinha@(a1)').rateYo({
+                    rating: @tb1,
+                    numStars: 5,
+                    maxValue: 5,
+                    halfStar: true,
+                    starWidth: "20px",
+                    readOnly: true
+
+                });
+            });
+        </script>
+        a1++;
+        tb1 = 0;
+    }
+}
+<div class="ps-products-wrap pt-80 pb-80">
+    <div class="ps-products" data-mh="product-listing">
+        <div class="ps-product-action">
+            <div class="ps-product__filter">
+                <select class="ps-select selectpicker" onchange="window.location.href=this.value;">
+                    <option>Sắp xếp  theo</option>
+                    <option value="/noi-bat">Đáng chú ý</option>
+                    <option value="/thap-den-cao">Giá (Thấp ➞ Cao )</option>
+                    <option value="/cao-den-thap">Giá (Cao ➞ Thấp)</option>
+                </select>
+            </div>
+        </div>
+        <div class="ps-product__columns">
+            @foreach (var item in Model)
+            {
+                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="ps-product__column">
+                    <div class="ps-shoe mb-30">
+                        <div class="ps-shoe__thumbnail">
+                            <a class="ps-shoe__favorite" href="/them-gio-hang?productId=@item.ID&quantity=1"><i class="ps-icon-shopping-cart"></i></a>
+                            <img class="sizeimg" src="@item.Image" alt="@item.Name"><a class="ps-shoe__overlay" href="@link"></a>
+                        </div>
+                        <div class="ps-shoe__content">
+                            <div class="ps-shoe__variants">
+
+                                <span class="trungbinha@(i1)"></span>
+                            </div>
+                            <div class="ps-shoe__detail">
+                                <a class="ps-shoe__name" href="@link">@item.Name</a>
+                                <p class="ps-product__category"><a href="/san-pham/@category.MetaTitle-@category.ID"> @category.Name</a></p>
+                                @if (item.PromotionPrice != null)
+                                {
+                                    <span class="ps-shoe__price">
+                                        <del>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ</del>
+                                        @item.PromotionPrice đ
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="ps-shoe__price">
+                                        @(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")đ
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                i1++;
+            }
+        </div>
+        <!--Phân trang-->
+        @if (ViewBag.TotalPage > 1)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            // Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
+            <div class="ps-product-action">
+                <div class="ps-pagination">
+                    <ul class="pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li>
+                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                        }
+                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                            <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+                    </ul>
+                </div>
+            </div> }
+        else
+        {
+            <div>
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        <h5>
+                            Đã là trang cuối!
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    <div class="ps-sidebar" data-mh="product-listing">
+        <aside class="ps-widget--sidebar ps-widget--category">
+            @{ Html.RenderAction("ProductCategory2", "Product");}
+        </aside>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+﻿@model List<WebShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+}
+@using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+{
+    <div class="ps-checkout pt-80 pb-80">
+        <div class="ps-container">
+            <form class="ps-checkout__form" action="do_action" method="post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+                        <div class="ps-checkout__billing">
+                            <h3>Chi tiết thanh toán</h3>
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    Tên người nhận
+                                </label>
+                                <input name="shipName" class="form-control" type="text">
+                            </div>
+
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    Số điện thoại
+                                </label>
+                                <input name="mobile" class="form-control" type="text">
+                            </div>
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    Email
+                                </label>
+                                <input name="email" class="form-control" type="email">
+                            </div>
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    Địa chỉ
+                                </label>
+                                <input name="address" class="form-control" type="text">
+                            </div>
+
+                            <h3 class="mt-40">Thêm thông tin bổ sung</h3>
+                            <div class="form-group form-group--inline textarea">
+                                <label>Ghi chú</label>
+                                <textarea name="content" class="form-control" rows="5" placeholder="Thêm thông tin về dơn hàng, ví dụ: địa chỉ."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                        <div class="ps-checkout__order">
+                            <header>
+                                <h3>Đơn hàng của bạn</h3>
+                            </header>
+                            <div class="content">
+                                <table class="table ps-checkout__products">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase">Sản phẩm</th>
+                                            <th class="text-uppercase">Số lượng </th>
+                                            <th class="text-uppercase">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Product.Name </td>
+                                                <td>@item.Quantity </td>
+                                                <td>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <footer>
+                                @if (Model.Count > 0)
+                                {
+                                    <h3 class="col-md-8">
+                                        Tổng:
+                                    </h3>
+                                    <h3 class="col-md-2">
+                                        @Model.Sum(i => (i.Quantity))
+                                    </h3>
+                                    <h3 class="col-md-8">
+                                        Thành tiền:
+                                    </h3>
+
+                                    <h3 class="col-md-2">
+                                        @Model.Sum(i => ((i.Product.Price.GetValueOrDefault(0) * i.Quantity)))
+                                    </h3>
+
+                                }
+                                else
+                                {
+
+                                }
+                                <div class="form-group cheque">
+                                    <div class="ps-radio">
+                                        <input class="form-control" type="radio" id="rdo01" name="payment" checked>
+                                        <label for="rdo01">Thanh toán khi nhận hàng</label>
+                                        <p>Vui lòng nhập đầy đủ thông tin.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group paypal">
+                                    <div class="ps-radio ps-radio--inline">
+                                        <input class="form-control" type="radio" name="payment" id="rdo02">
+                                        <label for="rdo02">Chuyển khoản</label>
+                                    </div>
+                                    <ul class="ps-payment-method">
+                                        <li><a href="#"><img src="/Assets/Client/images/AgribankLogo.png" alt=""></a></li>
+                                        <li>
+                                            <a class="abc" href="@Url.Action("PaymentMomo","Cart")">     <img class="abc" src="~/Assets/Client/images/logo-momo.png" /></a>
+                                        </li>
+                                    </ul>
+
+                                    <button type="submit" class="ps-btn ps-btn--fullwidth">Gửi thông tin<i class="ps-icon-next"></i></button>
+                                </div>
+                            </footer>
+                        </div>
+                        <div class="ps-shipping">
+                            <h3>Miễn phí giao hàng</h3>
+                            <p>Giao hàng miễn phí với đơn hàng dưới 10km.</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}

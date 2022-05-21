@@ -119,7 +119,7 @@ namespace WebShopOnline.Areas.Admin.Controllers
 
             foreach (var item in listImages)
             {
-                var subStringItem = item.Substring(22 + 1);
+                var subStringItem = item.Substring(22 + 6);
                 xElement.Add(new XElement("Image", subStringItem));
             }
             ProductDao dao = new ProductDao();

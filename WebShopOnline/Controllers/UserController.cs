@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 using System.Xml.Linq;
 using WebShopOnline.Common;
 using WebShopOnline.LoginGoogle;
@@ -308,6 +309,7 @@ namespace WebShopOnline.Controllers
         public ActionResult Logout1()
         {
             Session[CommonConstants.USER_SESSION] = null;
+            FormsAuthentication.SignOut();
             return Redirect("/User/Login");
         }
 
@@ -378,7 +380,7 @@ namespace WebShopOnline.Controllers
                 {
                     string a = System.IO.File.ReadAllText(Server.MapPath("/Assets/Client/template/newForgotPassword.html"));
                     a = a.Replace("{{CustomerName}}", email);
-                    a = a.Replace("{{link}}", "https://localhost:44302/User/NewChangePassword/" + forgot.ID);
+                    a = a.Replace("{{link}}", "https://zeroone.somee.com/User/NewChangePassword/" + forgot.ID);
                     SendMail(email, "Email Quên Mật Khẩu Mới", a);
                     return RedirectToAction("SuccessEmail");
                 }

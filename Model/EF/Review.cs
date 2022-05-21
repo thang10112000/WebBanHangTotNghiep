@@ -10,6 +10,7 @@ namespace Model.EF
     public partial class Review
     {
         public long ID { get; set; }
+        public long? AnswerID { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Content { get; set; }

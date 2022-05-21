@@ -211,7 +211,7 @@ namespace WebShopOnline.Controllers
             string partnerCode = "MOMOQPV620220414";
             string accessKey = "P6c6TUXasoaoXDpt";
             string serectkey = "9zvvqk80KjI843mDdroa4py9A8MvDoXA";
-            string orderInfo = "Đơn mới";
+            string orderInfo = "Đơn hàng mới";
             string returnUrl = "https://localhost:44302/Cart/Success";
             string notifyurl = "http://ba1adf48beba.ngrok.io/Cart/Payment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 

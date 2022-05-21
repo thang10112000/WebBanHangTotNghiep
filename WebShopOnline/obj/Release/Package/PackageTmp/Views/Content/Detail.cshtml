@@ -1,0 +1,111 @@
+﻿@model Model.EF.Content
+@{
+    var listall = (List<Model.EF.Tag>)ViewBag.TagAll;
+    var listContents = (List<Model.EF.Content>)ViewBag.NewContents;
+    ViewBag.Title = "Thông tin tin tức";
+    Layout = "~/Views/Shared/_Layouts.cshtml";
+    var comment = Model.MetaTitle + "-" + Model.ID;
+}
+
+<div class="ps-blog-grid pt-80 pb-80">
+    <div class="ps-container">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+                <div class="ps-post--detail">
+                    <div class="ps-post__thumbnail imgdetail"><img src="@Model.Image" class="" alt="@Model.Name"></div>
+                    <div class="ps-post__header">
+                        <h3 class="ps-post__title">@Model.Name</h3>
+                        <p class="ps-post__meta">Posted by <a href="#">@Model.CreatedBy </a> on @Model.CreatedDate </p>
+                    </div>
+                    <div class="ps-post__content">
+                        <p>  @Html.Raw(Model.Detail)</p>
+                    </div>
+                    <div class="ps-post__footer">
+                        <p class="ps-post__tags">
+                            <i class="fa fa-tags"></i>
+                            @{ var tags = (List<Model.EF.Tag>)ViewBag.Tags;
+                                foreach (var tag in tags)
+                                {
+                                    <a href="/tag/@tag.ID"> @tag.Name </a>
+                                }
+                            }
+                        </p>
+                        @*<div class="ps-post__actions">
+                                <span><i class="fa fa-comments"></i> 23 Comments</span><span><i class="fa fa-heart"></i>  likes</span>
+                                <div class="ps-post__social">
+                                    <i class="fa fa-share-alt"></i><a href="#">Share</a>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+
+                @*<div class="ps-comments">
+                        <h3>Comment(4)</h3>
+                        <div class="ps-comment">
+                            <div class="ps-comment__thumbnail"><img src="images/user/2.jpg" alt=""></div>
+                            <div class="ps-comment__content">
+                                <header>
+                                    <h4>MARK GREY <span>(15 minutes ago)</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
+                                </header>
+                                <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses the launch and continued operation of the Hubble space telescope probably.</p>
+                            </div>
+                        </div>
+                        <div class="ps-comment ps-comment--reply">
+                            <div class="ps-comment__thumbnail"><img src="images/user/3.jpg" alt=""></div>
+                            <div class="ps-comment__content">
+                                <header>
+                                    <h4>MARK GREY <span>(3 hours ago)</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
+                                </header>
+                                <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses  continue ace explore.</p>
+                            </div>
+                        </div>
+                        <div class="ps-comment">
+                            <div class="ps-comment__thumbnail"><img src="images/user/4.jpg" alt=""></div>
+                            <div class="ps-comment__content">
+                                <header>
+                                    <h4>MARK GREY <span>(1 day ago)</span></h4><a href="#">Reply<i class="ps-icon-arrow-left"></i></a>
+                                </header>
+                                <p>The development of the mass spectrometer allowed the mass of atoms to be measured with increased accuracy. The device uses the launch and continued operation of the Hubble space telescope probably.</p>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+
+                <aside class="ps-widget--sidebar">
+                    <div class="ps-widget__header">
+                        <h3>Tin tức</h3>
+                    </div>
+                    <div class="ps-widget__content">
+                        @foreach (var item in listContents)
+                        {
+                            var link = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                            <div class="ps-post--sidebar">
+                                <div class="ps-post__thumbnail"><a href="@link"></a><img src="@item.Image" alt="@item.Name"></div>
+                                <div class="ps-post__content"><a class="ps-post__title" href="@link">@item.Name</a><span>@item.CreatedDate</span></div>
+                            </div>
+                        }
+                    </div>
+                </aside>
+                <aside class="ps-widget--sidebar">
+                    <div class="ps-widget__header">
+                        <h3>Tags</h3>
+                    </div>
+                    <div class="ps-widget__content">
+                        <ul class="ps-tags">
+                            @foreach (var item in listall)
+                            {
+                                <li><a href="/tag/@item.ID">@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
